@@ -5,7 +5,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
 export default function Footer() {
   return (
-    <footer className="bg-[#000000] text-white bottom-0 w-full font-sans"> {/* Added font-roboto */}
+    <footer className="bg-[#000000] text-white bottom-0 w-full font-sans relative ">
       <div className=" mx-auto py-8 flex justify-between max-w-6xl ">
         <div className="flex flex-col sm:flex-row"> {/* Flex container for logo and contact */}
           <img
@@ -27,17 +27,17 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-2">USEFUL LINKS</h3>
             <ul className="mt-4 space-y-2 opacity-60">
               <li>
-                <a className="hover:text-gray-300" href="#">
+                <a className="hover:text-gray-300" href="/profile">
                   Account
                 </a>
               </li>
               <li>
-                <a className="hover:text-gray-300" href="#">
+                <a className="hover:text-gray-300" href="/products">
                   Shop
                 </a>
               </li>
               <li>
-                <a className="hover:text-gray-300" href="#">
+                <a className="hover:text-gray-300" href="/cart">
                   Cart
                 </a>
               </li>

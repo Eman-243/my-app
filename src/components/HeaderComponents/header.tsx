@@ -6,59 +6,51 @@
 import Link from "next/link"
 import { Input } from "@/components/HeaderComponents/ui/input"
 import { Button } from "@/components/HeaderComponents/ui/button"
-interface IconProps extends React.SVGProps<SVGSVGElement> {}
+interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
 
 export default function Component() {
   return (
-    <header className="bg-white py-4 px-8 font-sans" >
+    <header className="bg-black pt-1 pb-0 px-8 font-sans">
       <div className="mx-auto flex max-w-6xl items-baseline justify-between">
         <div className="flex items-baseline space-x-8">
-        <img
-  alt="Nexcel logo"
-  className="h-8 md:h-10"
-  height="32"  // Decreased height to make it smaller
-  src="/logo.png"
-  style={{
-    width: "auto",  // Letting the browser adjust the width automatically
-    height: "auto",  // Letting the browser adjust the height automatically
-    maxWidth: "120px",  // Limiting the maximum width to 120 pixels
-    maxHeight: "70px",  // Limiting the maximum height to 40 pixels
-  }}
-/>
-
-
-          <nav className="hidden space-x-4 md:flex">
-            <Link className="text-gray-600 hover:text-gray-900" href="#">
-              Home
-            </Link>
-            <Link className="text-gray-600 hover:text-gray-900" href="#">
-              Services
-            </Link>
-            <Link className="text-gray-600 hover:text-gray-900" href="#">
-              Shop
-            </Link>
+          <img
+            alt="Nexcel logo"
+            className="h-8 md:h-10"
+            height="32"
+            src="/logo1.png"
+            style={{
+              width: "auto",
+              height: "auto",
+              maxWidth: "120px",
+              maxHeight: "70px",
+            }}
+          />
+          <nav className="hidden space-x-4 md:flex mr-4">
+            <Link href="/" className="text-white hover:text-gray-300">Home</Link>
+            <Link href="/services" className="text-white hover:text-gray-300">Services</Link>
+            <Link href="/products" className="text-white hover:text-gray-300">Shop</Link>
           </nav>
+          <div className="relative w-96 mb-1">
+  <Input className="pl-10 w-full" placeholder="Search" type="search" />
+  <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+</div>
+
         </div>
         <div className="flex items-center space-x-4">
-          <div className="relative">
-            <Input className="pl-10" placeholder="Search" type="search" />
-            <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-          </div>
-          <ShoppingCartIcon className="text-gray-600" />
-          <Link className="text-gray-600 hover:text-gray-900" href="/login">
-            Sign In
+          <Link href="/cart">
+          <ShoppingCartIcon className="text-white" />
           </Link>
-          <Link href="/login">
-          <Button className="bg-yellow-400 text-white">Sign Up</Button>
-
-          </Link>
-          
+          <Link href="/login" className="text-white hover:text-gray-300">Sign In</Link>
+          <Link href="/about" className="text-white hover:text-gray-300">About Us</Link>
+          <Link href="/english" className="text-white hover:text-gray-300">English</Link>
         </div>
       </div>
     </header>
   )
 }
+
+
 
 function SearchIcon(props: IconProps) {
   return (
