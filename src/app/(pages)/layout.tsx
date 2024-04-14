@@ -1,14 +1,13 @@
-"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-
+import Path from "@/components/path";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    const pathname = usePathname();
-    const [input, setInput] = useState("");
+
     return(
-    <div>
+        <div>
+        <Path/>
             {children}
             </div>
             
