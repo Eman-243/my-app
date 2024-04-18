@@ -6,7 +6,7 @@ export default function Component() {
   const pathnames = pathname.split('/').filter(x => x)
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-2 bg-zinc-100 shadow-sm rounded-sm font-sans box-content">
+    <div className="w-full max-w-6xl mx-auto px-4 py-2 bg-zinc-100 shadow-sm rounded-sm font-sans">
       <nav aria-label="Breadcrumb">
         <ol className="flex space-x-2 text-sm">
           <li>

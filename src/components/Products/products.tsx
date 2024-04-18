@@ -1,7 +1,7 @@
 
 export default function Component() {
     return (
-      <div className="max-w-5xl	max-h-max bg-zinc-100 mb-2 shadow-sm rounded-sm font-sans ml-2 flex-shrink-0 flex-grow">
+      <div className="max-w-5xl	max-h-max bg-zinc-100 shadow-sm rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow">
         <div className="grid grid-cols-3 gap-4">
           <div className="border rounded-lg p-4 flex flex-col items-center">
             <HeartIcon className="self-end text-yellow-400" />

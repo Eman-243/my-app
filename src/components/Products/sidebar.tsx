@@ -25,12 +25,12 @@ export default function Component() {
   };
 
   return (
-    <div className="w-full max-w-40	py-2 bg-zinc-100 shadow-sm rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow">
+    <div className="w-full max-w-40 bg-zinc-100 shadow-sm rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full">
       <div className="space-y-4">
         {categories.map((category, index) => (
           <div key={index}>
             <button
-              className="flex items-center justify-between w-full text-left text-sm font-medium text-gray-900"
+              className="flex items-center justify-between w-full text-left text-sm font-medium text-gray-900 pl-2 pt-2"
               onClick={() => toggleCategory(index)}
             >
               <span>{category.name}</span>
@@ -39,7 +39,7 @@ export default function Component() {
               </svg>
             </button>
             {expandedCategories[index] && (
-              <div className="mt-2 ml-4 space-y-1 text-sm">
+              <div className="mt-2 ml-4 space-y-1 text-sm pl-2 pt-2">
                 {category.subcategories.map((subcategory) => (
                   <div key={subcategory}>{subcategory}</div>
                 ))}
