@@ -5,11 +5,11 @@ import Path from "@/components/path";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
-    return(
+    return (
         <div>
-        <Path/>
+            <Path />
             {children}
-            </div>
-            
-)
+        </div>
+
+    )
 }

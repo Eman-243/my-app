@@ -1,29 +1,50 @@
+"use client";
 import React from "react";
+import Link from 'next/link';
+
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
 const products = [
   {
-    imageSrc: "/laptopDeals.png",
-    name: "Samsung Laptop",
-    price: "1250BD",
+      image: "/laptop2Deals.png",
+      name: "Samsung Laptop",
+      price: "BHD 126",
+      category: "Computers",  // Add this line
+      subcategory: "Laptops",  // Add this line
+      id: "1",
+      
+
   },
   {
-    imageSrc: "/laptop2Deals.png",
-    name: "Asus Laptop",
-    price: "1250BD",
+      image: "/AsusLaptop.png",
+      name: "Asus Laptop",
+      price: "BHD 125",
+      category: "Computers",  // Add this line
+      subcategory: "Laptops",  // Add this line
+      id: "2",
+
   },
   {
-    imageSrc: "/iphone.png",
-    name: "iPhone 13",
-    price: "300BD",
+      image: "/iphone.png",
+      name: "IPhone 13",
+      price: "BHD 300",
+      category: "phones",  // Add this line
+      id: "3",
+
   },
   {
-    imageSrc: "/monitorDeals.png",
-    name: "HP flat screen monitor",
-    price: "200BD",
+      image: "/MonitorDeals.png",
+      name: "HP5 Monitor",
+      price: "BHD 200",
+      category: "monitors",  // Add this line
+      id: "4",
+
   },
+ 
+  // Add more products here...
 ];
+
 
 export default function Component() {
   return (
@@ -31,24 +52,28 @@ export default function Component() {
       <h2 className="text-3xl font-bold mb-6">Deals</h2>
       <div className="grid grid-cols-4 gap-4">
         {products.map((product, index) => (
-          <div key={index} className="p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center dark:border-gray-800">
-            <div className="self-end">
-              <HeartIcon className="text-yellow-400 w-6 h-6 mb-4" />
-            </div>
-            <img
-              alt={product.name}
-              className="mb-4"
-              height="150"
-              src={product.imageSrc}
-              style={{
-                aspectRatio: "200/150",
-                objectFit: "cover",
-              }}
-              width="200"
-            />
-            <h3 className="text-lg font-semibold">{product.name}</h3>
-            <p className="text-yellow-400 font-semibold">{product.price}</p>
-          </div>
+          <Link href={`/products/${product.id}`} key={product.id}>
+            
+              <div className="p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center dark:border-gray-800">
+                <div className="self-end">
+                  <HeartIcon className="text-yellow-400 w-6 h-6 mb-4" />
+                </div>
+                <img
+                  alt={product.name}
+                  className="mb-4"
+                  height="150"
+                  src={product.image}
+                  style={{
+                    aspectRatio: "200/150",
+                    objectFit: "cover",
+                  }}
+                  width="200"
+                />
+                <h3 className="text-lg font-semibold">{product.name}</h3>
+                <p className="text-yellow-400 font-semibold">{product.price}</p>
+              </div>
+            
+          </Link>
         ))}
       </div>
     </div>

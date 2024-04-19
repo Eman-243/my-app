@@ -4,9 +4,8 @@ import { usePathname } from 'next/navigation'
 export default function Component() {
   const pathname = usePathname()
   const pathnames = pathname.split('/').filter(x => x)
-
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-2 bg-zinc-100 shadow-sm rounded-sm font-sans">
+    <div className="w-full max-w-6xl mx-auto px-4 py-2 bg-zinc-100 shadow-md rounded-sm font-sans mb-10">
       <nav aria-label="Breadcrumb">
         <ol className="flex space-x-2 text-sm">
           <li>
@@ -38,4 +37,5 @@ export default function Component() {
       </nav>
     </div>
   )
+
 }

@@ -30,7 +30,7 @@ export default function Component() {
           <nav className="hidden space-x-4 md:flex mr-4">
             <Link href="/" className="text-white hover:text-gray-300">Home</Link>
             <Link href="/services" className="text-white hover:text-gray-300">Services</Link>
-            <Link href="/products" className="text-white hover:text-gray-300">Shop</Link>
+            <Link href="/productList" className="text-white hover:text-gray-300">Shop</Link>
           </nav>
           <div className="flex justify-center items-center relative w-96 my-3">
             <Input className="pl-10 w-full" placeholder="Search" type="search" />

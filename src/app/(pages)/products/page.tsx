@@ -1,6 +1,5 @@
-
-export default function ProductList(){
+export default function Product(){
     return <div>
-        {/* <h1>Product List</h1> */}
+        <h1>Product</h1>
     </div>
 }
