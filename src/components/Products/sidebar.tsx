@@ -1,6 +1,7 @@
 "use client";
-import { useState } from 'react'
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react'
+
 
 interface ComponentProps {
     selectedCategory: string | null;
@@ -35,11 +36,17 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
     const handleSubcategoryClick = (category: string, subcategory: string) => {
         setSelectedCategory(category);
         setSelectedSubcategory(subcategory);
-        router.push(`productList/${category}/${subcategory}`);
+        router.replace(`/productList/${category}/${subcategory}`);
     };
+    
+
+    useEffect(() => {
+        handleSubcategoryClick('Computers', 'Laptops');
+    }, []);
+
 
     return (
-        <div className="w-full max-w-50 bg-zinc-100 shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
+        <div className="w-full max-w-50 min-h-scree bg-zinc-100 shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
             <h1 className="text-lg font-bold pb-4 pt-1 pl-4">Category</h1>
             <div className="space-y-4">
                 {categories.map((category, index) => (

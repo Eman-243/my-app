@@ -73,7 +73,7 @@ export default function Component({ selectedCategory, selectedSubcategory }:
 
 
     return (
-        <div className="max-w-5xl max-h-max bg-zinc-100 shadow-md rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
+        <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto max-h-lvh">
 
             {filteredProducts.map((product) => (

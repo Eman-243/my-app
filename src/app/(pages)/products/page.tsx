@@ -1,5 +1,14 @@
-export default function Product(){
-    return <div>
-        <h1>Product</h1>
-    </div>
+// pages/products/page.tsx
+"use client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function ProductsIndex() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/productList/Computers/Laptops');
+  }, []);
+
+  return null;  // Render nothing
 }

@@ -1,90 +1,75 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { GET } from '@/app/api/route';
+import { Button } from "@/components/ui/button";
+
+interface Product {
+  image: string;
+  name: string;
+  price: string;
+  category: string;
+  subcategory?: string;
+  id: string;
+}
 
 interface ProductDetailProps {
   productId: string | null;
 }
 
 export default function ProductDetail({ productId }: ProductDetailProps) {
-    const products = [
-        {
-            image: "/laptop2Deals.png",
-            name: "Samsung Laptop",
-            price: "BHD 126",
-            category: "Computers",  // Add this line
-            subcategory: "Laptops",  // Add this line
-            id: "1",
-            
+  const [product, setProduct] = useState<Product | null>(null);
 
-        },
-        {
-            image: "/AsusLaptop.png",
-            name: "Asus Laptop",
-            price: "BHD 125",
-            category: "Computers",  // Add this line
-            subcategory: "Laptops",  // Add this line
-            id: "2",
-
-        },
-        {
-            image: "/iphone.png",
-            name: "IPhone 13",
-            price: "BHD 300",
-            category: "phones",  // Add this line
-            id: "3",
-
-        },
-        {
-            image: "/MonitorDeals.png",
-            name: "HP5 Monitor",
-            price: "BHD 200",
-            category: "monitors",  // Add this line
-            id: "4",
-
-        },
-        {
-            image: "/MonitorDeals.png",
-            name: "HP1 Monitor",
-            price: "BHD 200",
-            category: "monitors",  // Add this line
-            id: "5",
-
-        },
-        {
-            image: "/MonitorDeals.png",
-            name: "HP3 Monitor",
-            price: "BHD 200",
-            category: "monitors",  // Add this line
-            id: "6",
-
-        },
-        {
-            image: "/MonitorDeals.png",
-            name: "HP4 Monitor",
-            price: "BHD 200",
-            category: "monitors",  // Add this line
-            id: "7",
-
-        },
-        // Add more products here...
-    ];
-
-    if (!productId) {
-        return <p>Loading...</p>;
+  useEffect(() => {
+    if (productId) {
+      const fetchProduct = async () => {
+        const fetchedProduct = await GET(productId);
+        if (fetchedProduct) {
+          setProduct(fetchedProduct);
+        }
+      };
+      fetchProduct();
     }
+  }, [productId]);
 
-    const product = products.find(product => product.id === productId);
+  if (!productId) {
+    return <p>Loading...</p>;
+  }
 
-    if (!product) {
-        return <p>Product not found</p>;
-    }
+  if (!product) {
+    return <p>Product not found</p>;
+  }
 
-    return (
+  return (
+    <div className="max-w-2xl mx-auto py-12 px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-            <h1>{product.name}</h1>
-            <img src={product.image} alt={product.name} />
-            <p>{product.price}</p>
+          <img
+            alt={product.name}
+            className="w-full h-auto object-contain"
+            height="500"
+            src={product.image}
+            style={{
+              aspectRatio: "500/500",
+              objectFit: "cover",
+            }}
+            width="500"
+          />
         </div>
-    );
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold">{product.name}</h1>
+          <div className="flex items-center space-x-2">
+            <span className="text-3xl font-semibold text-yellow-500">{product.price}</span>
+            <span className="text-sm">Inclusive of VAT</span>
+          </div>
+          <div className="border-t border-gray-200 pt-4">
+            <p className="text-gray-600">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s.
+            </p>
+          </div>
+          <Button className="bg-yellow-500 text-white w-full">Add To Cart</Button>
+        </div>
+      </div>
+    </div>
+  );
 }
-

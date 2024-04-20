@@ -12,3 +12,4 @@ export default function ProductDetailPage() {
 
   return <Productdetails productId={productId} />;
 }
+//app/pages/products/[productId]/page.tsx
