@@ -77,8 +77,8 @@ export default function Component({ selectedCategory, selectedSubcategory }:
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto max-h-lvh">
 
             {filteredProducts.map((product) => (
-    <Link href={`/products/${product.id}`} key={product.id}>
-        <div className="border rounded-t-lg rounded-b-[14px] flex flex-col items-center justify-between bg-white w-72 h-72">
+                <Link href={`/productList/${product.category}/${product.subcategory}/${product.id}`} key={product.id}>
+                <div className="border rounded-t-lg rounded-b-[14px] flex flex-col items-center justify-between bg-white w-72 h-72">
             <HeartIcon className="self-end text-yellow-400 pt-1 pr-1 w-6 h-6" />
             <img
                 alt={product.name}

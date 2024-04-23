@@ -14,3 +14,5 @@ export default function ProductList(){
         {/* <h1>Product List</h1> */}
     </div>
 }
+
+//pages/productList/page.tsx

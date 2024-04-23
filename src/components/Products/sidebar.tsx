@@ -26,7 +26,7 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
         // More categories...
     ];
     const router = useRouter();
-
+    
     const handleCategoryClick = (index: number) => {
         let newExpandedCategories = [...expandedCategories];
         newExpandedCategories[index] = !newExpandedCategories[index];
@@ -36,7 +36,8 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
     const handleSubcategoryClick = (category: string, subcategory: string) => {
         setSelectedCategory(category);
         setSelectedSubcategory(subcategory);
-        router.replace(`/productList/${category}/${subcategory}`);
+        const link = `/productList/${category}/${subcategory}`;
+        router.replace(link);
     };
     
 

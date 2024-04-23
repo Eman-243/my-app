@@ -8,10 +8,11 @@ import Topbar from '@/components/Products/topbar';
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
+  const [productId, setProductId] = useState<string | null>(null);
   
   const pathname = usePathname();
 
-  // On component mount, set the category and subcategory from the URL
+  // On component mount, set the category, subcategory, and product ID from the URL
   useEffect(() => {
     const pathParts = pathname.split('/');
     
@@ -21,9 +22,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     // The subcategory is the fourth part of the path
     const subcategory = pathParts[3];
 
+    // The product ID is the fifth part of the path
+    const productId = pathParts[4];
+
     setSelectedCategory(category);
     setSelectedSubcategory(subcategory);
+    setProductId(productId);
   }, [pathname]);
+
+  // If a product ID exists, don't render the layout
+  if (productId) {
+    return children;
+  }
 
   return (
     <div className="w-full max-w-6xl mx-auto py-2 box-content grid grid-cols-12 h-full ">
@@ -48,3 +58,4 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+//pages/productList/layout.tsx
