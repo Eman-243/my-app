@@ -1,10 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 
 export default function Component({ selectedCategory, selectedSubcategory }:
      { selectedCategory: string | null, selectedSubcategory: string | null }) {    // Your component code...
+        const [isLoading, setIsLoading] = useState(true); // Add this line
+
 
         const products = [
             {
@@ -30,7 +32,8 @@ export default function Component({ selectedCategory, selectedSubcategory }:
                 image: "/iphone.png",
                 name: "IPhone 13",
                 price: "BHD 300",
-                category: "phones",  // Add this line
+                category: "Mobiles",  // Add this line
+                subcategory: "Iphone",  //Add this line
                 id: "3",
     
             },
@@ -38,7 +41,8 @@ export default function Component({ selectedCategory, selectedSubcategory }:
                 image: "/MonitorDeals.png",
                 name: "HP5 Monitor",
                 price: "BHD 200",
-                category: "monitors",  // Add this line
+                category: "Computers",  // Add this line
+                subcategory:"Desktop Laptops",
                 id: "4",
     
             },
@@ -67,11 +71,33 @@ export default function Component({ selectedCategory, selectedSubcategory }:
     
             },
             // Add more products here...
+
         ];
+        useEffect(() => {
+            setIsLoading(false); // Update the loading state when the products are ready
+        }, [selectedCategory, selectedSubcategory]);
+        let filteredProducts: typeof products = [];
 
-    const filteredProducts = products.filter(product => product.category === selectedCategory && product.subcategory === selectedSubcategory);
-
-
+        if (selectedCategory && selectedSubcategory) {
+          filteredProducts = products.filter(product => product.category === selectedCategory && product.subcategory === selectedSubcategory);
+        }
+        else {
+            filteredProducts = products;
+        }
+        if (isLoading) {
+            return(
+                <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
+                
+    <div className="flex items-center justify-center h-screen">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="animate-spin rounded-full border-4 border-gray-300 border-t-gray-900 h-12 w-12" />
+        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Loading...</p>
+      </div>
+    </div>
+  
+</div>
+            )
+        }
     return (
         <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto max-h-lvh">

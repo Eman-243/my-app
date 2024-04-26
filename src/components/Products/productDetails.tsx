@@ -84,3 +84,4 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
     </div>
   );
 }
+//app/components/Products/productDetails.tsx

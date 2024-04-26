@@ -11,4 +11,4 @@ export default function ProductDetailLayout({ productId, children }: { productId
   );
 }
 
-//products/layout.tsx
+//pages/productList/[categoryId]/[subcategoryId]/[productId]/layout.tsx

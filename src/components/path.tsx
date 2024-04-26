@@ -17,16 +17,18 @@ export default function Component() {
           {pathnames.map((value, index) => {
             const last = index === pathnames.length - 1
             const to = `/${pathnames.slice(0, index + 1).join('/')}`
+            const decodedValue = decodeURIComponent(value);
+
 
             return last ? (
               <li aria-current="page" className="text-black font-medium" key={to}>
-                {value}
+                {decodedValue}
               </li>
             ) : (
               <li key={to}>
                 <div className="flex items-center">
                   <a className="text-black hover:text-gray-800" href={to}>
-                    {value}
+                    {decodedValue}
                   </a>
                   <span className="text-black mx-2">{`>`}</span>
                 </div>

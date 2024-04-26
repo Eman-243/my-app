@@ -4,5 +4,5 @@ export async function GET(productId: string) {
     const product = products.find(product => product.id === productId);
     return product;
 }
-//app/api/route.ts
+//app/pages/productList/[categoryId]/[subcategoryId]/[productId]/route.ts
 

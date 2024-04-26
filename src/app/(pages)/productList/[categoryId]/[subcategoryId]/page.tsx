@@ -6,8 +6,7 @@ export default function SubCategoryPage() {
   const subcategory  = params.subcategory;
   return (
     <div>
-      <pre>
-      </pre>
+     
     </div>
   );
 };
