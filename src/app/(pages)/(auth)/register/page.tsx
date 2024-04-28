@@ -8,57 +8,45 @@ import Link from "next/link"
 
 
 export default function Component() {
-    return (
-        <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans bg-white px-4 py-6 mt-10">
-        <div className="w-full max-w-md">
-          <h1 className="text-4xl font-semibold text-black text-center mb-10">Join Us</h1>
-          <form className="space-y-4">
-            <div>
-              <label className="sr-only" htmlFor="email">
-                Email Address
-              </label>
-              <Input id="email" placeholder="Email Address" type="email" />
-            </div>
-            <div>
-              <label className="sr-only" htmlFor="password">
-                Password
-              </label>
-              <Input id="password" placeholder="Password" type="password" />
-            </div>
-            <div>
-              <label className="sr-only" htmlFor="confirm-password">
-                Confirm Password
-              </label>
-              <Input id="confirm-password" placeholder="Confirm Password" type="password" />
-            </div>
-            <div>
-              <label className="sr-only" htmlFor="phone-number">
-                Phone Number
-              </label>
-              <Input id="phone-number" placeholder="Phone Number" type="tel" />
-            </div>
-            <Button className="w-full bg-[#F9B823] text-white">Register</Button>
-          </form>
-          <div className="mt-1 text-center">
-            <Link className="text-xs text-gray-500 hover:underline" href="/login">
-              Already have an account? Sign in
-            </Link>
+  return (
+    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans bg-white px-4 py-6 mt-10">
+      <div className="w-full max-w-md">
+        <h1 className="text-4xl font-semibold text-black text-center mb-10">Join Us</h1>
+        <form className="space-y-4">
+          <div>
+            <label className="sr-only" htmlFor="email">
+              Email Address
+            </label>
+            <Input id="email" placeholder="Email Address" type="email" required />
           </div>
+          <div>
+            <label className="sr-only" htmlFor="password">
+              Password
+            </label>
+            <Input id="password" placeholder="Password" type="password" required minLength={8} />
+          </div>
+          <div>
+            <label className="sr-only" htmlFor="confirm-password">
+              Confirm Password
+            </label>
+            <Input id="confirm-password" placeholder="Confirm Password" type="password" required minLength={8} />
+          </div>
+          <div>
+            <label className="sr-only" htmlFor="phone-number">
+              Phone Number
+            </label>
+            <Input id="phone-number" placeholder="Phone Number" type="tel" required pattern="[0-9]{8}" />
+          </div>
+          <Button className="w-full bg-[#F9B823] text-white" type="submit">Register</Button>
+        </form>
+        <div className="mt-1 text-center">
+          <Link className="text-xs text-gray-500 hover:underline" href="/login">
+            Already have an account? Sign in
+          </Link>
         </div>
-        {/* <div className="mt-10 lg:mt-0 lg:absolute lg:left-0 lg:ml-48">
-          <img
-            alt="Group of people"
-            className="h-[420px] w-[350px]"
-            height="300"
-            src="/standing.png"
-            style={{
-              aspectRatio: "500/500",
-              objectFit: "cover",
-            }}
-            width="500"
-          />
-        </div> */}
       </div>
-    )
-  }
+    </div>
+  );
+}
+
   
