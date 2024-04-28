@@ -11,7 +11,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         'sans': ['Montserrat', 'sans-serif'],
-         'worksans':[ "Work Sans", 'sans-serif']
+         'worksans':[ "Work Sans", 'sans-serif'],
+         'latolight': ['Lato', 'sans-serif'],
 
       },
       

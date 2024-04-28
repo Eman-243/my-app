@@ -47,7 +47,7 @@ export default function Component() {
               </p>
               <div className="inline-block">
                 <Button
-                  className="bg-yellow-500 text-white py-2 md:py-3 lg:py-4 px-6 md:px-16 rounded-lg hover:bg-black"
+                  className="bg-[#F9B823] text-white py-2 md:py-3 lg:py-4 px-6 md:px-16 rounded-lg hover:bg-black"
                   style={{ width: "auto" }}
                 >
                   Learn more

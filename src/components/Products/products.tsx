@@ -105,7 +105,7 @@ export default function Component({ selectedCategory, selectedSubcategory }:
             {filteredProducts.map((product) => (
                 <Link href={`/productList/${product.category}/${product.subcategory}/${product.id}`} key={product.id}>
                 <div className="border rounded-t-lg rounded-b-[14px] flex flex-col items-center justify-between bg-white w-72 h-72">
-            <HeartIcon className="self-end text-yellow-400 pt-1 pr-1 w-6 h-6" />
+            <HeartIcon className="self-end text-[#F9B823] pt-1 pr-1 w-6 h-6" />
             <img
                 alt={product.name}
                 className="mb-4"
@@ -119,7 +119,7 @@ export default function Component({ selectedCategory, selectedSubcategory }:
             />
             <div className="flex justify-between w-full rounded-full bg-zinc-100 shadow-lg align-center items-center pl-3 py-1">
                 <h2 className="text-lg ">{product.name}</h2>
-                <div className="bg-yellow-400 rounded-full items-center px-4 py-1">
+                <div className="text-[#F9B823] rounded-full items-center px-4 py-1">
                     <p className="text-sm font-medium text-white">{product.price}</p>
                 </div>
             </div>

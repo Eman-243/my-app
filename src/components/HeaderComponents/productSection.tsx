@@ -56,7 +56,7 @@ export default function Component() {
             
               <div className="p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center dark:border-gray-800">
                 <div className="self-end">
-                  <HeartIcon className="text-yellow-400 w-6 h-6 mb-4" />
+                  <HeartIcon className="text-[#F9B823] w-6 h-6 mb-4" />
                 </div>
                 <img
                   alt={product.name}
@@ -70,7 +70,7 @@ export default function Component() {
                   width="200"
                 />
                 <h3 className="text-lg font-semibold">{product.name}</h3>
-                <p className="text-yellow-400 font-semibold">{product.price}</p>
+                <p className="text-[#F9B823] font-semibold">{product.price}</p>
               </div>
             
           </Link>

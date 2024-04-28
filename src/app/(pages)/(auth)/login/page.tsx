@@ -3,9 +3,9 @@
  * @see https://v0.dev/t/NTpW2Bohs86
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/Cart/ui/input"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/Cart/ui/button"
 
 export default function Component() {
     return (
@@ -41,7 +41,7 @@ export default function Component() {
             </Link>
           </div>
         </div>
-        <div className="mt-10 lg:mt-0 lg:absolute lg:right-0 lg:mr-60">
+        {/* <div className="mt-0 absolute right-0 ">
         <img
           alt=""
           className="w-full lg:w-[276px] h-[343px]"
@@ -53,7 +53,7 @@ export default function Component() {
           }}
           width="300"
         />
-      </div>
+      </div> */}
     </div>
     )
   }

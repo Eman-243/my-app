@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/Cart/ui/button";
 import React, { useRef } from "react";
 
 interface IconProps extends React.SVGProps<SVGSVGElement> { }

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import React, { useEffect } from "react";
 import Header from "../components/HeaderComponents/header";
 import Footer from "../components/HeaderComponents/footer";
+import Head from 'next/head' // Import the Head component
 import { saveScrollPosition, loadScrollPosition } from '@/scripts/scrollPosition'; // Adjust the path based on your actual file structure
 import '../styles/main.scss'; // Adjust the path based on your actual file structure
 
@@ -16,10 +17,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       loadScrollPosition();
     }
   }, []);
-  
+
   return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <html lang="en">
-        <body className={`${inter.className} flex flex-col min-h-screen`}>
+        <body className={`${inter.className} flex flex-col min-h-full	min-w-full max-w-96	`}>
           <div className="mb-12">
             <Header />
           </div>
@@ -28,6 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <Footer />
         </body>
+
       </html>
+    </>
   );
+
 }

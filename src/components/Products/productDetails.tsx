@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { GET } from '@/app/api/route';
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/Cart/ui/button";
 
 interface Product {
   images: string[];
@@ -68,7 +68,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
           <div>
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <div className="flex items-center space-x-2">
-              <span className="text-3xl font-semibold text-yellow-500">{product.price}</span>
+              <span className="text-3xl font-semibold text-[#F9B823]">{product.price}</span>
               <span className="text-sm">Inclusive of VAT</span>
             </div>
             <div className="border-t border-gray-200 pt-4">
@@ -78,7 +78,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
               </p>
             </div>
           </div>
-          <Button className="bg-yellow-500 text-white w-full">Add To Cart</Button>
+          <Button className="bg-[#F9B823] text-white w-full">Add To Cart</Button>
         </div>
       </div>
     </div>

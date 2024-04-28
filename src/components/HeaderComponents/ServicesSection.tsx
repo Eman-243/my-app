@@ -29,10 +29,10 @@ export default function FlipCard() {
           return (
             <ReactCardFlip isFlipped={flippedStates[index]} flipDirection="horizontal" key={index}>
               <div
-                className="w-64 h-56 relative rounded-md flex flex-col items-center justify-center border border-slate-100 hover:border-yellow-400 cursor-pointer"
+                className="w-64 h-56 relative rounded-md flex flex-col items-center justify-center border border-slate-100 hover:border-[#F9B823] cursor-pointer"
                 onClick={() => handleClick(index)}
               >
-                <Icon className="w-16 h-16 text-yellow-400 hover:text-black" />
+                <Icon className="w-16 h-16 text-[#F9B823] hover:text-black" />
                 <div className="text-black text-lg pt-3">
                   {card.service}
                 </div>
@@ -42,7 +42,7 @@ export default function FlipCard() {
                 className="w-64 h-56 relative flex items-center justify-center"
                 onClick={() => handleClick(index)}
               >
-                <Icon className="w-16 h-16 text-yellow-400 hover:text-black" />
+                <Icon className="w-16 h-16 text-[#F9B823] hover:text-black" />
                 <div className="absolute inset-0 bg-black bg-fixed opacity-50 text-center flex items-center justify-center rounded text-white tracking-wide px-2">
                   {card.text}
                 </div>
