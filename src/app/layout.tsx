@@ -21,10 +21,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       </Head>
       <html lang="en">
-        <body className={`${inter.className} flex flex-col min-h-full	min-w-full max-w-96	`}>
+        <body className={`${inter.className} 	`}>
           <div className="mb-12">
             <Header />
           </div>

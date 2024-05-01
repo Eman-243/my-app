@@ -41,3 +41,10 @@ html, body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+@media screen and (max-width: 768px){
+  .min-w-full{
+    min-width: 133%;
+  }
+}

@@ -11,7 +11,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
 export default function Component() {
   return (
-    <header className="bg-black pt-1 pb-0 px-8 font-sans">
+    <header className="bg-black pt-1 pb-0 px-8 font-sans 7">
       <div className="mx-auto flex max-w-6xl items-baseline justify-between">
         <div className="flex items-baseline space-x-8">
           <img
