@@ -17,8 +17,7 @@ export default function Component() {
           {pathnames.map((value, index) => {
             const last = index === pathnames.length - 1
             const to = `/${pathnames.slice(0, index + 1).join('/')}`
-            const decodedValue = decodeURIComponent(value);
-
+            const decodedValue = decodeURIComponent(value).replace(/-/g, ' ');
 
             return last ? (
               <li aria-current="page" className="text-black font-medium" key={to}>
@@ -39,5 +38,4 @@ export default function Component() {
       </nav>
     </div>
   )
-
 }

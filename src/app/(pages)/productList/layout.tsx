@@ -21,7 +21,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     setSelectedCategory(category);
     setSelectedSubcategory(subcategory);
     setProductId(productId);
-  }, [pathname]);
+    window.scrollTo(0, 0);
+    // Save the new scroll position
+    sessionStorage.setItem('scrollPosition', '0');
+}, [pathname]);
 
   if (productId) {
     return children;

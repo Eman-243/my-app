@@ -13,6 +13,7 @@ const config: Config = {
         'sans': ['Montserrat', 'sans-serif'],
          'worksans':[ "Work Sans", 'sans-serif'],
          'latolight': ['Lato', 'sans-serif'],
+         'roboto': ['Roboto', 'sans-serif'],
 
       },
       
@@ -21,6 +22,12 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
 
+      },
+      spacing: {
+        
+          '4.1': '1.031rem',
+        
+        
       },
       
     },

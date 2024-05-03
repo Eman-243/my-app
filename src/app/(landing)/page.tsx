@@ -1,10 +1,10 @@
 
 import Image from "next/image";
-import HeroSection from "../../components/HeaderComponents/heroSection";
-import Category from "../../components/HeaderComponents/categorySection";
-import Services from "@/components/HeaderComponents/ServicesSection";
-import Product from "@/components/HeaderComponents/productSection";
-import Brands from "@/components/HeaderComponents/brands";
+import HeroSection from "../../components/LandingPage/heroSection";
+import Category from "../../components/LandingPage/categorySection";
+import Services from "@/components/LandingPage/ServicesSection";
+import Product from "@/components/LandingPage/productSection";
+import Brands from "@/components/LandingPage/brands";
 export default function Home() {
 
   return (
