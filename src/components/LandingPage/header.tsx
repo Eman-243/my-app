@@ -18,7 +18,7 @@ export default function Component() {
             alt="Nexcel logo"
             className="h-8 md:h-10"
             height="32"
-            src="Logo/logo1.png"
+            src="/logo1.png"
             style={{
               width: "auto",
               height: "auto",

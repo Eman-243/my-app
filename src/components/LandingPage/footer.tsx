@@ -11,7 +11,7 @@ export default function Footer() {
           <img
             alt="Logo"
             className="h-24 w-24 mb-4 sm:mb-0 sm:mr-4"
-            src="Logo/logo2.png"
+            src="/logo2.png"
             style={{
               objectFit: "fill",
             }}

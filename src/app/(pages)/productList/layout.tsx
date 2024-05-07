@@ -2,7 +2,7 @@
 import Sidebar from '@/components/Products/sidebar';
 import Topbar from '@/components/Products/topbar';
 import Products from '@/components/Products/products';
-import { usePathname ,  } from 'next/navigation';
+import { usePathname  } from 'next/navigation';
 import { useEffect,useState } from 'react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
