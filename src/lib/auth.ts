@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from "jose"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
-import { NextRequest, NextResponse} from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { PrismaClient } from "prisma/prisma-client"
 import bcrypt from "bcrypt"
 
@@ -11,10 +11,10 @@ const key = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: any) {
     return await new SignJWT(payload)
-    .setProtectedHeader({alg: "HS256"})
-    .setIssuedAt()
-    .setExpirationTime("10 sec from now")
-    .sign(key);
+        .setProtectedHeader({ alg: "HS256" })
+        .setIssuedAt()
+        .setExpirationTime("10 sec from now")
+        .sign(key);
 }
 
 export async function decrypt(input: string): Promise<any> {
@@ -29,9 +29,9 @@ export async function login(formData: FormData) {
     let data = Object.fromEntries(formData);
 
     // Find the user in the database
-    const user = await prisma.users.findUnique({
+    const user = await prisma.user.findUnique({
         where: {
-            username: data.username.toString(),
+            UserName: data.username.toString(),
         }
     });
 
@@ -41,15 +41,24 @@ export async function login(formData: FormData) {
         return false; // Adjust based on your error handling strategy
     }
 
+    if (!user.Password) {
+        // Handle error, e.g., user does not have a password
+        return false; // Adjust based on your error handling strategy
+    }
+
+    if (!user.UserName) {
+        return false;
+    }
+
     // Compare the hashed password
-    const isMatch = await bcrypt.compare(data.password.toString(), user.password);
+    const isMatch = await bcrypt.compare(data.password.toString(), user.Password);
     if (!isMatch) {
         // Handle error, e.g., incorrect password
         return false; // Adjust based on your error handling strategy
     }
 
     // If credentials are correct, create the session
-    const expires = new Date(Date.now() + 10 * 1000); // Session expiration
+    const expires = new Date(Date.now() + 10 * 60 * 1000); // Session expiration
     const session = await encrypt({ user, expires });
 
     // Save the session in cookies
@@ -57,7 +66,7 @@ export async function login(formData: FormData) {
         expires,
         httpOnly: true,
     });
-    cookies().set("user", user.username, {
+    cookies().set("user", user.UserName, {
         expires,
         httpOnly: true,
     });
@@ -92,14 +101,39 @@ export async function updateSession(req: NextRequest) {
     }
 
     const parsed = await decrypt(session);
-    parsed.expires = new Date(Date.now() + 10 * 1000);
+    parsed.expires = new Date(Date.now() + 10 * 60 * 1000);
 
     const res = NextResponse.next();
     res.cookies.set({
         name: "session",
         value: await encrypt(parsed),
         httpOnly: true,
-        expires: parsed.expires,    
+        expires: parsed.expires,
     })
-    
+
 }
+
+export async function createRoles() {
+    if (await prisma.role.findUnique({ where: { RoleName: "Admin" } })) {
+        return;
+    } else {
+        await prisma.role.create({
+            data: {
+                RoleID: 1,
+                RoleName: "Admin"
+            }
+        });
+    }
+
+    if (await prisma.role.findUnique({ where: { RoleName: "User" } })) {
+        return;
+
+    } else {
+        await prisma.role.create({
+            data: {
+                RoleID: 2,
+                RoleName: "User"
+            }
+        });
+    }
+} 
