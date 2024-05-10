@@ -47,7 +47,7 @@ export default function Component() {
           <Link href="/login" className="text-white hover:text-gray-300">
             Sign In
           </Link>
-          <Link href="/NexcelProfile.pdf" className="text-white hover:text-gray-300">
+          <Link href="/about" className="text-white hover:text-gray-300">
             About Us
           </Link>
           <Link href="/english" className="text-white hover:text-gray-300">

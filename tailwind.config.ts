@@ -14,6 +14,7 @@ const config: Config = {
          'worksans':[ "Work Sans", 'sans-serif'],
          'latolight': ['Lato', 'sans-serif'],
          'roboto': ['Roboto', 'sans-serif'],
+         'Alegreya': ['Alegreya Sans SC', 'sans-serif'],
 
       },
       

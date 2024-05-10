@@ -1,12 +1,8 @@
 "use client";
-import { useEffect } from 'react';
-
+import About from "@/components/aboutUs/component";
 export default function Component() {
-  useEffect(() => {
-    window.location.href = '/NexcelProfile.pdf';
-  }, []);
 
   return (
-    <h1>Page</h1>
+    <About />
   );
 }

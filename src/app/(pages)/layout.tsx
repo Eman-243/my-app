@@ -14,7 +14,7 @@ export default function Layout({ children }: LayoutProps) {
     console.log(pathname); // Add this line
 
     // Don't render Path component for these routes
-    const noPathRoutes = ['/register', '/forgot-password', '/login'];
+    const noPathRoutes = ['/register', '/forgot-password', '/login' ,'/about'];
 
     if (noPathRoutes.includes(pathname)) {
         return (

@@ -1,8 +1,4 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/NTpW2Bohs86
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+"use client";
 import { Input } from "@/components/Cart/ui/input"
 import Link from "next/link"
 import { Button } from "@/components/Cart/ui/button"
@@ -17,7 +13,7 @@ export default function Component() {
             <label className="sr-only" htmlFor="email">
               Email Address
             </label>
-            <Input id="email" placeholder="Email Address" type="email" required />
+            <Input id="email" placeholder="Email Address" type="email" required/>
           </div>
           <div>
             <label className="sr-only" htmlFor="password">
@@ -26,7 +22,7 @@ export default function Component() {
             <Input id="password" placeholder="Password" type="password" required minLength={8} />
           </div>
           <div className="flex justify-end right-0">
-            <Link className="text-xs text-gray-500 hover:underline" href="/forgot-password">
+            <Link href="/forgot-password" className="text-xs text-gray-500 hover:underline" >
               Forgot Password?
             </Link>
           </div>

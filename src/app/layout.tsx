@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       loadScrollPosition();
     }
   }, []);
-  
+
 
   return (
     <>
@@ -24,6 +24,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <html lang="en">
+        <head>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+          />
+          <link rel="stylesheet" href="styles.css" />
+        </head>
         <body className={`${inter.className} grid	`}>
           <div className="mb-12">
             <Header />
