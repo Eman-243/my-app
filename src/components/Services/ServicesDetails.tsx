@@ -119,62 +119,64 @@ export default function Component() {
 
   return (
     <div className="mx-auto max-w-6xl">
-      <section className="max-w-6xl pt-12 md:pt-16 lg:pt-24 pb-3 md:pb-6 lg:pb-12 ">
+      <section className="pt-12 pb-3 md:pt-16 md:pb-6 lg:pt-24 lg:pb-12">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tighter">
                 Our Services
               </h1>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-
+              <p className="mx-auto text-base md:text-lg lg:text-xl text-gray-500 dark:text-gray-400">
+                {/* Description if needed */}
               </p>
             </div>
           </div>
         </div>
       </section>
-      <section className="max-w-6xl py-3 md:py-6 lg:py-12 bg-gray-100 dark:bg-gray-800" style={{ backgroundImage: 'url("services/background.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      <div className="container grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 md:px-6 grid-rows-1">
-  {services.map((service, index) => (
-    <Link href={`/services/${service.title.replace(/ /g, '-').toLowerCase()}`} key={index}>
-      <div className="flex flex-col items-start space-y-3 rounded-lg bg-white p-6 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md dark:bg-gray-950 dark:shadow-none hover:text-white border hover:border-white hover:bg-[#0054A1] h-full">
-        <service.icon className="h-8 w-8" />
-        <h3 className="text-lg font-semibold">{service.title}</h3>
-        <p className="text-sm flex-grow">{service.description}</p>
-      </div>
-    </Link>
-  ))}
-</div>
-
-
-</section>
-
-
-     
-      <section className="w-full py-8 md:py-12 lg:py-16 ">
-  <div className="container px-4 md:px-6">
-    <div className="grid gap-6 lg:grid-cols-2 lg:gap-12" style={{ height: '371px' }}>
-      <div className="space-y-4">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Redefining IT Solutions with Nexcel</h2>
-        <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-          In today's digital age, trustworthy IT services are crucial for business growth. But is your IT partner up to the task? At Nexcel, Bahrain's premier IT company, we provide reliable services that turn complex IT problems into simple, economical solutions. We specialize in IT support, including installation and maintenance of IT equipment. Choose Nexcel for fast, efficient IT solutions that make a world of difference.
-        </p>
-      </div>
-      <img
-        alt="Expertise"
-        className="mx-auto aspect-square overflow-hidden rounded-xl object-cover sm:w-full h-full"
-        src="services/ServicesBack.png"
-      />
-    </div>
+      <section className="py-3 md:py-6 lg:py-12 bg-gray-100 dark:bg-gray-800 flex justify-center rounded-md" style={{ backgroundImage: 'url("services/background.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+  <div className="container grid grid-cols-2 gap-6 px-4 md:px-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
+    {services.map((service, index) => (
+      <Link href={`/services/${service.title.replace(/ /g, '-').toLowerCase()}`} key={index}>
+        <div className="flex flex-col items-start space-y-3 rounded-lg bg-white p-6 shadow-sm transition-all hover:scale-105 hover:shadow-md dark:bg-gray-950 dark:shadow-none hover:text-white border hover:border-white hover:bg-[#0054A1] h-full">
+          <service.icon className="h-8 w-8" />
+          <h3 className="text-lg font-semibold">{service.title}</h3>
+          <p className="text-sm flex-grow miniphone:hidden tablet:flex">{service.description}</p>
+        </div>
+      </Link>
+    ))}
   </div>
 </section>
-<section className="max-w-6xl py-8 md:py-16 lg:py-24 ">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center py-1 md:py-3 lg:py-6">Your Ultimate IT Support Solution in Bahrain</h2>
-              <p className="max-w-6xl text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400 text-center">
-              In search of top-notch IT Support? Look no further than Nexcel. We function as an in-house IT department, delivering prompt, precise, and high-quality services. Our IT Support Services in Bahrain are feature-rich and economically priced to reduce your business costs. Established in 2014, we are a proud Bahraini company with corporate offices and a retail store. Over time, we've built a solid reputation as a reliable IT service provider, adept at successfully delivering on every project. Trust Nexcel for all your IT needs.</p>
+
+      <section className="py-8 md:py-12 lg:py-16">
+        <div className="container px-4 md:px-6">
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
+            <div className="space-y-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">
+                Redefining IT Solutions with Nexcel
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">
+                In today's digital age, trustworthy IT services are crucial for business growth. At Nexcel, we provide reliable services that simplify complex IT challenges. Choose Nexcel for efficient IT solutions.
+              </p>
+            </div>
+            <img
+              alt="Expertise"
+              className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover"
+              src="services/ServicesBack.png"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="py-8 md:py-16 px-4 lg:py-24">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-center py-1 md:py-3 lg:py-6">
+          Your Ultimate IT Support Solution in Bahrain
+        </h2>
+        <p className="mx-auto text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl text-center">
+          Looking for top-notch IT Support? Nexcel offers comprehensive, feature-rich IT services designed to minimize costs and maximize efficiency. Trust Nexcel for all your IT needs.
+        </p>
       </section>
     </div>
-  )
+  );
+  
 }
 
 

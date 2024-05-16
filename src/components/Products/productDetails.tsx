@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { GET } from '@/app/api/route';
+import { GET } from '@/api/route';
 import { Button } from "@/components/Cart/ui/button";
 
 interface Product {

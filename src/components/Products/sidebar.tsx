@@ -1,4 +1,5 @@
 // Import necessary hooks and functions from React and Next.js
+"use client";
 import { useSearchParams } from 'next/navigation'; // Hook to access URL search parameters
 import { useState, useEffect } from 'react' // React hooks for managing state and side effects
 import { useRouter } from 'next/navigation'; // Hook to access the Next.js router
@@ -49,7 +50,7 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
         setSelectedCategory(category);
         setSelectedSubcategory(subcategory);
         // Build the new URL
-        const link = `/productList/${category}/${subcategory}?category=${category}&subcategory=${subcategory}`;
+        const link = `/products/${category}/${subcategory}?category=${category}&subcategory=${subcategory}`;
         
         // Navigate to the new URL
         router.replace(link);

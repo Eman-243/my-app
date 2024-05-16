@@ -4,133 +4,131 @@ import Link from 'next/link';
 
 
 export default function Component({ selectedCategory, selectedSubcategory }:
-     { selectedCategory: string | null, selectedSubcategory: string | null }) {    // Your component code...
-        const [isLoading, setIsLoading] = useState(true); // Add this line
+    { selectedCategory: string | null, selectedSubcategory: string | null }) {    // Your component code...
+    const [isLoading, setIsLoading] = useState(true); // Add this line
 
 
-        const products = [
-            {
-                image: "/laptop2Deals.png",
-                name: "Samsung Laptop",
-                price: "BHD 126",
-                category: "Computers",  // Add this line
-                subcategory: "Laptops",  // Add this line
-                id: "1",
-                
-    
-            },
-            {
-                image: "/AsusLaptop.png",
-                name: "Asus Laptop",
-                price: "BHD 125",
-                category: "Computers",  // Add this line
-                subcategory: "Laptops",  // Add this line
-                id: "2",
-    
-            },
-            {
-                image: "/iphone.png",
-                name: "IPhone 13",
-                price: "BHD 300",
-                category: "Mobiles",  // Add this line
-                subcategory: "Iphone",  //Add this line
-                id: "3",
-    
-            },
-            {
-                image: "/MonitorDeals.png",
-                name: "HP5 Monitor",
-                price: "BHD 200",
-                category: "Computers",  // Add this line
-                subcategory:"Desktop Laptops",
-                id: "4",
-    
-            },
-            {
-                image: "/MonitorDeals.png",
-                name: "HP1 Monitor",
-                price: "BHD 200",
-                category: "monitors",  // Add this line
-                id: "5",
-    
-            },
-            {
-                image: "/MonitorDeals.png",
-                name: "HP3 Monitor",
-                price: "BHD 200",
-                category: "monitors",  // Add this line
-                id: "6",
-    
-            },
-            {
-                image: "/MonitorDeals.png",
-                name: "HP4 Monitor",
-                price: "BHD 200",
-                category: "monitors",  // Add this line
-                id: "7",
-    
-            },
-            // Add more products here...
+    const products = [
+        {
+            image: "/laptop2Deals.png",
+            name: "Samsung Laptop",
+            price: "BHD 126",
+            category: "Computers",  // Add this line
+            subcategory: "Laptops",  // Add this line
+            id: "1",
 
-        ];
-        useEffect(() => {
-            setIsLoading(false); // Update the loading state when the products are ready
-        }, [selectedCategory, selectedSubcategory]);
-        let filteredProducts: typeof products = [];
 
-        if (selectedCategory && selectedSubcategory) {
-          filteredProducts = products.filter(product => product.category === selectedCategory && product.subcategory === selectedSubcategory);
-        }
-        else {
-            filteredProducts = products;
-        }
-        if (isLoading) {
-            return(
-                <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
-                
-    <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-col items-center space-y-4">
-        <div className="animate-spin rounded-full border-4 border-gray-300 border-t-gray-900 h-12 w-12" />
-        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Loading...</p>
-      </div>
-    </div>
-  
-</div>
-            )
-        }
-    return (
-        <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto max-h-lvh">
+        },
+        {
+            image: "/AsusLaptop.png",
+            name: "Asus Laptop",
+            price: "BHD 125",
+            category: "Computers",  // Add this line
+            subcategory: "Laptops",  // Add this line
+            id: "2",
 
-            {filteredProducts.map((product) => (
-                <Link href={`/productList/${product.category}/${product.subcategory}/${product.id}`} key={product.id}>
-                <div className="border rounded-t-lg rounded-b-[14px] flex flex-col items-center justify-between bg-white w-72 h-72">
-            <HeartIcon className="self-end text-[#F9B823] pt-1 pr-1 w-6 h-6" />
-            <img
-                alt={product.name}
-                className="mb-4"
-                height="150"
-                src={product.image}
-                style={{
-                    aspectRatio: "214/150",
-                    objectFit: "cover",
-                }}
-                width="200"
-            />
-            <div className="flex justify-between w-full rounded-full bg-zinc-100 shadow-lg align-center items-center pl-3 py-1">
-                <h2 className="text-lg ">{product.name}</h2>
-                <div className="text-[#F9B823] rounded-full items-center px-4 py-1">
-                    <p className="text-sm font-medium text-white">{product.price}</p>
+        },
+        {
+            image: "/iphone.png",
+            name: "IPhone 13",
+            price: "BHD 300",
+            category: "Mobiles",  // Add this line
+            subcategory: "Iphone",  //Add this line
+            id: "3",
+
+        },
+        {
+            image: "/MonitorDeals.png",
+            name: "HP5 Monitor",
+            price: "BHD 200",
+            category: "Computers",  // Add this line
+            subcategory: "Desktop Laptops",
+            id: "4",
+
+        },
+        {
+            image: "/MonitorDeals.png",
+            name: "HP1 Monitor",
+            price: "BHD 200",
+            category: "monitors",  // Add this line
+            id: "5",
+
+        },
+        {
+            image: "/MonitorDeals.png",
+            name: "HP3 Monitor",
+            price: "BHD 200",
+            category: "monitors",  // Add this line
+            id: "6",
+
+        },
+        {
+            image: "/MonitorDeals.png",
+            name: "HP4 Monitor",
+            price: "BHD 200",
+            category: "monitors",  // Add this line
+            id: "7",
+
+        },
+        // Add more products here...
+
+    ];
+    useEffect(() => {
+        setIsLoading(false); // Update the loading state when the products are ready
+    }, [selectedCategory, selectedSubcategory]);
+    let filteredProducts: typeof products = [];
+
+    if (selectedCategory && selectedSubcategory) {
+        filteredProducts = products.filter(product => product.category === selectedCategory && product.subcategory === selectedSubcategory);
+    }
+    else {
+        filteredProducts = products;
+    }
+    if (isLoading) {
+        return (
+            <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans miniphone:ml-0 tablet:ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
+
+                <div className="flex items-center justify-center h-screen">
+                    <div className="flex flex-col items-center space-y-4">
+                        <div className="animate-spin rounded-full border-4 border-gray-300 border-t-gray-900 h-12 w-12" />
+                        <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Loading...</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </Link>
-))}
-
 
             </div>
+        )
+    }
+    return (
+        <div className="max-w-full max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans miniphone:ml-0 tablet:ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
+          <div className="grid grid-cols-1 miniphone:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto max-h-lvh">
+            {filteredProducts.map((product) => (
+              <Link href={`/products/${product.category}/${product.subcategory}/${product.id}`} key={product.id} className="w-full sm:w-auto">
+                <div className="border rounded-t-lg rounded-b-[14px] flex flex-col items-center justify-between bg-white h-full">
+                  <HeartIcon className="self-end text-[#F9B823] pt-1 pr-1 w-6 h-6" />
+                  <img
+                    alt={product.name}
+                    className="mb-4"
+                    src={product.image}
+                    style={{
+                      aspectRatio: "214/150",
+                      objectFit: "cover",
+                    
+                    }}
+                  />
+                  <div className="flex flex-col items-center justify-between w-full bg-zinc-100 shadow-lg rounded-b-lg py-2">
+                    <h2 className="text-lg">{product.name}</h2>
+                    <div className="text-[#F9B823] rounded-full bg-[#F9B823] items-center px-4 py-1 mt-2">
+                      <p className="text-sm font-medium text-white">{product.price}</p>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-    )
+      );
+      
+      
 }
 
 function HeartIcon(props: React.SVGProps<SVGSVGElement>) {
