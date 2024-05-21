@@ -33,15 +33,15 @@ export default function Blog() {
 
     return (
         
-        <div className="max-w-6xl w-auto mx-auto p-4 flex  flex-col items-center justify-between ">
+        <div className="max-w-6xl w-auto mx-auto py-4 flex  flex-col items-center justify-between  ">
             <img src={blog.imageUrl} alt={blog.title} className="w-full h-full object-cover object-center"/>
 
-            <div className="bg-white shadow-lg rounded-lg">
+            <div className="bg-white dark:bg-[#030712] mt-2 dark:border-[#313a51] border border-transparent shadow-lg rounded-lg">
                 <div className="p-4">
                     <h1 className="text-3xl font-bold">{blog.title}</h1>
-                    <span className="text-sm text-gray-600">By {blog.author}<br/></span>
-                    <span className="text-sm text-gray-600">{new Date(blog.date).toLocaleDateString()}</span>
-                    <p className="text-gray-700 mt-2 leading-relaxed text-base">{blog.description}</p>
+                    <span className="text-sm text-gray-600 dark:text-gray-300">By {blog.author}<br/></span>
+                    <span className="text-sm text-gray-600 dark:text-gray-300">{new Date(blog.date).toLocaleDateString()}</span>
+                    <p className="text-gray-700 mt-2 leading-relaxed text-base dark:text-gray-300">{blog.description}</p>
                   
                 </div>
             </div>

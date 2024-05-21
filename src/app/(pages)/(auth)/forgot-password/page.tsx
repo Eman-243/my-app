@@ -6,7 +6,7 @@ import { CardContent, Card } from "@/components/ui/card"
 
 export default function Component() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans bg-white px-4 py-6 mt-10">
+    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans px-4 py-6 mt-10">
       <div className="w-full max-w-md space-y-4">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Forgot Password</h1>
@@ -21,7 +21,7 @@ export default function Component() {
               <Input id="email" placeholder="Enter your email" required type="email" />
             </div>
 
-            <Button className="w-full bg-[#F9B823] text-white" type="submit">Reset Password
+            <Button className="w-full bg-[#F9B823] dark:hover:bg-[#F9B823] dark:hover:text-white text-white" type="submit">Reset Password
             </Button>
 
           </CardContent>

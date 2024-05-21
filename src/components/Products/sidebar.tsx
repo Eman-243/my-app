@@ -87,25 +87,25 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
 
 
     return (
-        <div className="w-full max-w-50 min-h-scree bg-zinc-100 shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
+        <div className="w-full max-w-50 min-h-scree dark:bg-[#030712] bg-zinc-100 border border-transparent dark:border-[#313a51] shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
             <h1 className="text-lg font-bold pb-4 pt-1 pl-4">Category</h1>
             <div className="space-y-4">
                 {categories.map((category, index) => (
                     <div key={index}>
                         <button
-                            className="flex items-center justify-between w-full text-left text-sm font-medium text-gray-900 px-4  pb-1"
+                            className="flex items-center justify-between w-full text-left text-sm font-medium dark:text-white text-gray-900 px-4  pb-1"
                             onClick={() => {
                                 console.log('category clicked:', category.name);
                                 handleCategoryClick(index);
                             }}
                         >
                             <span>{category.name}</span>
-                            <svg className="w-5 h-5 text-gray-900 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path d={expandedCategories[index] ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             </svg>
                         </button>
                         {expandedCategories[index] && (
-                            <div className="ml-4 space-y-1 text-sm px-4 flex flex-col text-left items-start">
+                            <div className="ml-4 space-y-1 dark:text-white text-sm px-4 flex flex-col text-left items-start">
                                 {category.subcategories.map((subcategory) => (
                                     <button key={subcategory} onClick={() => {
                                         console.log('subcategory clicked:', subcategory);

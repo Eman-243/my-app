@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export default function Component() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans bg-white px-4 py-6 mt-10">
+    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans px-4 py-6 mt-10">
       <div className="w-full max-w-md">
         <h1 className="text-4xl font-bold text-center mb-10">Welcome</h1>
         <form className="space-y-4">
@@ -27,7 +27,7 @@ export default function Component() {
             </Link>
           </div>
 
-          <Button className="w-full bg-[#F9B823] text-white" type="submit">Login</Button>
+          <Button className="w-full bg-[#F9B823] dark:hover:bg-[#F9B823] dark:hover:text-white text-white" type="submit">Login</Button>
         </form>
         <div className="mt-4 text-center">
           <Link href="/sign-up">

@@ -102,7 +102,7 @@ export default function ServicePage() {
   }
 
   return (
-    <div style={{ backgroundImage: 'url("/services/back5.png")'}}>
+    <div >
       <div className='max-w-6xl mx-auto w-auto font-sans'>
         <div className='relative'>
           <img src={service.image} alt={service.title} className='w-full' />
@@ -114,11 +114,11 @@ export default function ServicePage() {
             </div>
           </div>
         </div>
-        <div className='py-2 px-2 mb-24 mt-24 ' style={{ backgroundImage: 'url("/services/back8.png")'}}>
-          <div className='mb-24 mt-24 '>
-            <div className='mb-8'>
-              <h1 className='text-black text-3xl miniphone:text-xl font-bold mb-1 text-center'>{service.title}</h1>
-              <h2 className='text-black text-xl mb-1 text-center'>Installation Across Bahrain !</h2>
+        <div className='py-2 px-2 mb-24 mt-24  dark:bg-[#030712] dark:border-[#313a51] border border-transparent' >
+          <div className='mb-16 mt-16 '>
+            <div className=''>
+              <h1 className='text-black text-3xl miniphone:text-xl font-bold mb-1 text-center dark:text-white'>{service.title}</h1>
+              <h2 className='text-black text-xl mb-1 text-center dark:text-gray-300'>Installation Across Bahrain !</h2>
             </div>
             <div className=''>
               <p className='text-lg text-center'>
@@ -126,11 +126,11 @@ export default function ServicePage() {
               </p>
             </div>
           </div>
-          <div className='mt-8'>
+          <div className=''>
             <h2 className='text-3xl font-bold mb-4 text-center'>Key Benefits</h2>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
               {service.features.map((feature, index) => (
-                <motion.div key={index} className='bg-white rounded-lg p-6 shadow-md' whileHover={{
+                <motion.div key={index} className='bg-white  rounded-lg p-6 shadow-md' whileHover={{
                     position: 'relative',
                     zIndex: 1,
                     backgroundImage: 'url("/services/back2.png")',
@@ -139,10 +139,10 @@ export default function ServicePage() {
                       duration: .2
                     }
                   }} style={{ backgroundImage: 'url("/services/back2.png")'}}>
-                  <h3 className='text-xl font-bold mb-2'>{feature.title}</h3>
+                  <h3 className='text-xl font-bold mb-2 dark:text-black'>{feature.title}</h3>
                   <ul>
                     {feature.benefits.map((benefit, index) => (
-                      <li className="mb-1" key={index}>{`${index + 1}. ${benefit}`}</li>
+                      <li className="mb-1 dark:text-black" key={index}>{`${index + 1}. ${benefit}`}</li>
                     ))}
                   </ul>
                 </motion.div>

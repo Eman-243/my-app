@@ -64,7 +64,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
             ))}
           </div>
         </div>
-        <div className="space-y-4 bg-zinc-100  p-4 flex flex-col justify-between">
+        <div className="space-y-4 bg-zinc-100 dark:bg-[#030712] border border-transparent dark:border-[#313a51] p-4 flex flex-col justify-between">
           <div>
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <div className="flex items-center space-x-2">
@@ -78,7 +78,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
               </p>
             </div>
           </div>
-          <Button className="bg-[#F9B823] text-white w-full">Add To Cart</Button>
+          <Button className="bg-[#F9B823] dark:hover:bg-[#F9B823] text-white w-full dark:hover:text-white">Add To Cart</Button>
         </div>
       </div>
     </div>

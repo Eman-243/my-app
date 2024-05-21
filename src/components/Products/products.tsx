@@ -86,7 +86,7 @@ export default function Component({ selectedCategory, selectedSubcategory }:
     }
     if (isLoading) {
         return (
-            <div className="max-w-5xl max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans miniphone:ml-0 tablet:ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
+            <div className="max-w-5xl max-h-full dark:bg-[#030712] border border-transparent dark:border-[#313a51] min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans miniphone:ml-0 tablet:ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
 
                 <div className="flex items-center justify-center h-screen">
                     <div className="flex flex-col items-center space-y-4">
@@ -99,11 +99,11 @@ export default function Component({ selectedCategory, selectedSubcategory }:
         )
     }
     return (
-        <div className="max-w-full max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans miniphone:ml-0 tablet:ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
+        <div className="max-w-full dark:bg-[#030712] border border-transparent dark:border-[#313a51] max-h-full min-h-screen bg-zinc-100 shadow-md rounded-sm font-sans miniphone:ml-0 tablet:ml-2 mt-2 flex-shrink-0 flex-grow py-4 px-4">
           <div className="grid grid-cols-1 miniphone:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 overflow-y-auto max-h-lvh">
             {filteredProducts.map((product) => (
               <Link href={`/products/${product.category}/${product.subcategory}/${product.id}`} key={product.id} className="w-full sm:w-auto">
-                <div className="border rounded-t-lg rounded-b-[14px] flex flex-col items-center justify-between bg-white h-full">
+                <div className="border  flex flex-col items-center justify-between bg-white h-full">
                   <HeartIcon className="self-end text-[#F9B823] pt-1 pr-1 w-6 h-6" />
                   <img
                     alt={product.name}
@@ -115,10 +115,13 @@ export default function Component({ selectedCategory, selectedSubcategory }:
                     
                     }}
                   />
-                  <div className="flex flex-col items-center justify-between w-full bg-zinc-100 shadow-lg rounded-b-lg py-2">
-                    <h2 className="text-lg">{product.name}</h2>
-                    <div className="text-[#F9B823] rounded-full bg-[#F9B823] items-center px-4 py-1 mt-2">
-                      <p className="text-sm font-medium text-white">{product.price}</p>
+                  <div className="flex flex-col text-center items-center justify-between w-full dark:bg-[#121212] bg-zinc-100 shadow-lg  ">
+                    <div className='my-2'>
+                    <h2 className="text-lg text-center">{product.name}</h2>
+
+                    </div>
+                    <div className="text-[#F9B823] dark:bg-[#121212] bg-[#F9B823] w-full text-center items-center  px-4 py-1">
+                      <p className="text-sm font-medium text-white dark:text-[#F9B823] dark:font-bold">{product.price}</p>
                     </div>
                   </div>
                 </div>

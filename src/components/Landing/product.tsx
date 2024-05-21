@@ -45,15 +45,15 @@ export const products = [
 
 export default function Component() {
     return (
-      <div className="bg-white max-w-6xl mx-auto mb-8 font-sans tablet:my-24">
+      <div className=" max-w-6xl mx-auto mb-8 font-sans tablet:my-24">
         <h2 className="tablet:text-3xl miniphone:text-xl font-bold mb-6 tablet:text-left miniphone:text-center">Deals</h2>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4 ">
           {products.map((product, index) => (
             <Link href={`/productList/${product.category}/${product.subcategory}/${product.id}`} key={product.id}>
-              <motion.div className="p-4 border border-gray-200 rounded-lg shadow-md flex flex-col items-center dark:border-gray-800 w-full sm:w-full miniphone:w-40" whileHover={{
+              <motion.div className="p-4 border dark:hover:bg-slate-800 dark:bg-slate-800 border-gray-200 rounded-lg shadow-md flex flex-col items-center  w-full sm:w-full miniphone:w-40 dark:border-[#313a51] " whileHover={{
                 position: 'relative',
                 zIndex: 1,
-                background: 'white',
+                
                 scale: 1.2,
                 transition: {
                   duration: .2

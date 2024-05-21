@@ -9,9 +9,9 @@ import Link from "next/link"
 
 export default function Component() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans bg-white px-4 py-6 mt-10">
+    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans px-4 py-6 mt-10">
       <div className="w-full max-w-md">
-        <h1 className="text-4xl font-semibold text-black text-center mb-10">Join Us</h1>
+        <h1 className="text-4xl font-semibold  text-center mb-10">Join Us</h1>
         <form className="space-y-4">
           <div>
             <label className="sr-only" htmlFor="email">
@@ -37,7 +37,7 @@ export default function Component() {
             </label>
             <Input id="phone-number" placeholder="Phone Number" type="tel" required pattern="[0-9]{8}" />
           </div>
-          <Button className="w-full bg-[#F9B823] text-white" type="submit">Register</Button>
+          <Button className="w-full bg-[#F9B823] dark:hover:bg-[#F9B823] dark:hover:text-white text-white" type="submit">Register</Button>
         </form>
         <div className="mt-1 text-center">
           <Link className="text-xs text-gray-500 hover:underline" href="/sign-in">

@@ -38,7 +38,7 @@ export default function FlipCard() {
               <div className="rounded-full bg-[#F9B823] p-4">
                 <Icon className="tablet:w-16 tablet:h-16 miniphone:w-10 miniphone:h-10 text-white" />
               </div>
-              <div className="text-black tablet:text-xl miniphone:text-[10px] pt-3 font-semibold text-center">
+              <div className="text-black dark:text-white tablet:text-xl miniphone:text-[10px] pt-3 font-semibold text-center">
                 {card.service}
               </div>
             </motion.div>
