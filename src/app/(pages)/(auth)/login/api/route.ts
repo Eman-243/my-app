@@ -2,13 +2,13 @@ import { login } from "@/lib/auth"
 import { NextResponse, NextRequest } from "next/server"
 import { PrismaClient } from "prisma/prisma-client";
 import { compareSync } from "bcrypt";
+const prisma = new PrismaClient();
 
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
     const {userNameNew, pass} = body;
 
-    const prisma = new PrismaClient();
     const user = await prisma.user.findUnique({
         where: {
             UserName: userNameNew
