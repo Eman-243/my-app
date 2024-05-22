@@ -2,7 +2,7 @@
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/Cart/ui/card"
 import { Separator } from "@/components/Cart/ui/separator"
 import { Label } from "@/components/Cart/ui/label"
-import { Input } from "@/components/Cart/ui/input"
+import { Input } from "@/components/ui/input"
 import { Button } from "@/components/Cart/ui/button"
 interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
@@ -123,7 +123,7 @@ export default function Component() {
                   <Input id="cvv" placeholder="Enter CVV" />
                 </div>
                 <div className="grid gap-2  items-end ">
-                  <Button className="bg-[#F9B823]" size="lg">Place order</Button>
+                  <Button className="bg-[#F9B823] dark:hover:bg-[#F9B823] dark:hover:text-white " size="lg">Place order</Button>
                 </div>
               </div>
             </form>

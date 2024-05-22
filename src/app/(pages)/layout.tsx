@@ -1,33 +1,25 @@
-"use client";
-import { useState } from "react";
-import Path from "@/components/path";
-import { usePathname } from "next/navigation";
-import path from "path";
+import Header from "@/components/Header/header"
+import Footer from "@/components/Footer/footer"
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
+export default function RootLayout({
+    children,
+  }: {
+    children: React.ReactNode
+  }) {
+return (
+    <>
+    <div className="flex flex-col h-screen justify-between">
 
-export default function Layout({ children }: LayoutProps) {
-    const pathname = usePathname();
-    
-    console.log(pathname); // Add this line
+        <Header /> 
+        <main className="mb-auto">
+      
 
-    // Don't render Path component for these routes
-    const noPathRoutes = ['/register', '/forgot-password', '/login'];
-
-    if (noPathRoutes.includes(pathname)) {
-        return (
-            <div>
-                {children}
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            <Path />
             {children}
+        </main>
+        <Footer/>
+
         </div>
-    );
+
+    </>
+);
 }

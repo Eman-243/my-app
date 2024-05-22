@@ -1,4 +1,4 @@
-import { products } from '@/app/data/productdata';
+import { products } from '@/data/productdata';
 
 export async function GET(productId: string) {
     const product = products.find(product => product.id === productId);

@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { GET } from '@/app/api/route';
+import React, { useEffect, useState } from "react";
+import { GET } from "@/app/api/route";
 import { Button } from "@/components/Cart/ui/button";
 
 interface Product {
@@ -18,7 +18,7 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ productId }: ProductDetailProps) {
   const [product, setProduct] = useState<Product | null>(null);
-  const [selectedImage, setSelectedImage] = useState<string>('');
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
   useEffect(() => {
     if (productId) {
@@ -47,7 +47,6 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
             height="500"
             src={selectedImage}
             style={{
-              
               objectFit: "cover",
             }}
             width="500"
@@ -64,21 +63,26 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
             ))}
           </div>
         </div>
-        <div className="space-y-4 bg-zinc-100  p-4 flex flex-col justify-between">
+        <div className="space-y-4 bg-zinc-100 dark:bg-[#030712] border border-transparent dark:border-[#313a51] p-4 flex flex-col justify-between">
           <div>
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <div className="flex items-center space-x-2">
-              <span className="text-3xl font-semibold text-[#F9B823]">{product.price}</span>
+              <span className="text-3xl font-semibold text-[#F9B823]">
+                {product.price}
+              </span>
               <span className="text-sm">Inclusive of VAT</span>
             </div>
             <div className="border-t border-gray-200 pt-4">
               <p className="text-gray-600">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s.
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s.
               </p>
             </div>
           </div>
-          <Button className="bg-[#F9B823] text-white w-full">Add To Cart</Button>
+          <Button className="bg-[#F9B823] dark:hover:bg-[#F9B823] text-white w-full dark:hover:text-white">
+            Add To Cart
+          </Button>
         </div>
       </div>
     </div>
