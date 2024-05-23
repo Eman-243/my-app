@@ -6,7 +6,7 @@ const blogPosts = [
     {
         id: '1',
         title: 'Exploring the Future of Technology',
-        description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+        description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like) It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
         date: '2024-05-10',
         author: 'Jane Doe',
         imageUrl: '/services/amc.png'
@@ -33,10 +33,10 @@ export default function Blog() {
 
     return (
         
-        <div className="max-w-6xl w-auto mx-auto py-4 flex  flex-col items-center justify-between  ">
+        <div className="max-w-6xl w-auto mx-auto py-4 flex  flex-col items-center justify-between h-full">
             <img src={blog.imageUrl} alt={blog.title} className="w-full h-full object-cover object-center"/>
 
-            <div className="bg-white dark:bg-[#030712] mt-2 dark:border-[#313a51] border border-transparent shadow-lg rounded-lg">
+            <div className="bg-white dark:border-[#5f5f5f]  dark:bg-transparent mt-2 border border-transparent shadow-lg rounded-lg h-svh">
                 <div className="p-4">
                     <h1 className="text-3xl font-bold">{blog.title}</h1>
                     <span className="text-sm text-gray-600 dark:text-gray-300">By {blog.author}<br/></span>

@@ -33,7 +33,7 @@ interface FirstSidebarProps {
   return (
     <>
       {sidebarVisible && (
-        <div className="fixed inset-0 bg-opacity-50 transition-opacity duration-700 ease-in-out" onClick={toggleSidebar}>
+        <div className="fixed inset-0 bg-opacity-50 transition-opacity z-50 duration-700 ease-in-out" onClick={toggleSidebar}>
         <div className="fixed top-0 left-0 w-10/12 h-full bg-[#faebd7] rounded-lg shadow-lg z-50 transition-transform duration-700 ease-in-out" style={{ transform: 'translateX(0)' }}>
           <div className="flex justify-start bg-[#F9B823] pt-[21.5px] pb-[21.5px] items-center mb-2 hover:border-blue-50">
                <FaRegUserCircle className="text-white h-10 w-10 mr-3 ml-3" />

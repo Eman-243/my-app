@@ -61,7 +61,7 @@ export default function Component() {
     return (
         <div className="mx-auto  font-latolight max-w-6xl">
           <h1 className="miniphone:text-center tablet:text-left text-2xl sm:text-3xl font-semibold mb-8 ">Shopping Cart</h1>
-          <div className="flex flex-col gap-8 mb-8 px-3 py-3 dark:bg-[#030712] dark:border border-transparent dark:border-[#313a51]  border-2">
+          <div className="flex flex-col gap-8 mb-8 px-3 py-3   border-gray-300 border">
             {products.map((product, index) => (
               <div key={index} className="flex flex-col miniphone:flex-row justify-between pb-4">
                 <div className="flex flex-1">

@@ -87,7 +87,7 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
 
 
     return (
-        <div className="w-full max-w-50 min-h-scree dark:bg-[#030712] bg-zinc-100 border border-transparent dark:border-[#313a51] shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
+        <div className="w-full max-w-50 min-h-scree   dark:border-[#5f5f5f]  dark:bg-[#424242] bg-zinc-100 border border-transparent  shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
             <h1 className="text-lg font-bold pb-4 pt-1 pl-4">Category</h1>
             <div className="space-y-4">
                 {categories.map((category, index) => (

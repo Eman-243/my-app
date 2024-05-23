@@ -133,7 +133,7 @@ export default function Component() {
           </div>
         </div>
       </section>
-      <section className="py-3 md:py-6 lg:py-12 bg-gray-100 dark:bg-gray-800 flex justify-center rounded-md" style={{ backgroundImage: 'url("services/background.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <section className="py-3 md:py-6 lg:py-12 bg-gray-100 dark:bg-transparent flex justify-center rounded-md" >
   <div className="container grid grid-cols-2 gap-6 px-4 md:px-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 ">
     {services.map((service, index) => (
       <Link href={`/services/${service.title.replace(/ /g, '-').toLowerCase()}`} key={index}>
@@ -147,33 +147,42 @@ export default function Component() {
   </div>
 </section>
 
-      <section className="py-8 md:py-12 lg:py-16">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-            <div className="space-y-4">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">
-                Redefining IT Solutions with Nexcel
-              </h2>
-              <p className="text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl">
-                In today's digital age, trustworthy IT services are crucial for business growth. At Nexcel, we provide reliable services that simplify complex IT challenges. Choose Nexcel for efficient IT solutions.
-              </p>
-            </div>
-            <img
-              alt="Expertise"
-              className="mx-auto w-full h-auto overflow-hidden rounded-xl object-cover"
-              src="services/ServicesBack.png"
-            />
-          </div>
-        </div>
-      </section>
-      <section className="py-8 md:py-16 px-4 lg:py-24">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-center py-1 md:py-3 lg:py-6">
-          Your Ultimate IT Support Solution in Bahrain
-        </h2>
-        <p className="mx-auto text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl text-center">
-          Looking for top-notch IT Support? Nexcel offers comprehensive, feature-rich IT services designed to minimize costs and maximize efficiency. Trust Nexcel for all your IT needs.
-        </p>
-      </section>
+<section className="py-8 md:py-16 px-4 lg:py-16">
+  <div className="flex flex-col lg:flex-row items-center lg:justify-between">
+    <img
+      src="services/Maskgroup.png"
+      alt="IT Solutions"
+      className="w-full lg:w-1/2 h-auto"
+    />
+    <div className="lg:w-1/2 lg:pl-8">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-center lg:text-left py-1 md:py-3 lg:py-6">
+        Redefining IT Solutions with Nexcel
+      </h2>
+      <p className="mx-auto lg:mx-0 text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl text-center lg:text-left">
+        In today's digital age, trustworthy IT services are crucial for business growth. At Nexcel, we provide reliable services that simplify complex IT challenges. Choose Nexcel for efficient IT solutions.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section className="py-8 md:py-16 px-4 lg:py-16">
+  <div className="flex flex-col lg:flex-row-reverse items-center lg:justify-between">
+    <img
+      src="services/servicesBack.png"
+      alt="IT Support"
+      className="w-full lg:w-1/2 h-auto rounded-[10px]"
+    />
+    <div className="lg:w-1/2 lg:pr-8">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-center lg:text-right py-1 md:py-3 lg:py-6">
+        Your Ultimate IT Support Solution in Bahrain
+      </h2>
+      <p className="mx-auto lg:mx-0 text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl text-center lg:text-right">
+        Looking for top-notch IT Support? Nexcel offers comprehensive, feature-rich IT services designed to minimize costs and maximize efficiency. Trust Nexcel for all your IT needs.
+      </p>
+    </div>
+  </div>
+</section>
+
     </div>
   );
   

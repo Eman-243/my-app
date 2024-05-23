@@ -56,8 +56,8 @@ export default function Blog() {
     <div>
       <div className="max-w-6xl mx-auto mt-4">
         <div className="flex items-center space-x-4 mb-2">
-          <div className='relative rounded-lg dark:border-[#313a51] flex flex-col items-center border-2 border-transparent hover:border-[#00C2E4]/25'>
-            <button className='bg-zinc-100 dark:bg-[#030712] py-1 px-2 rounded-lg' onClick={handleSortDate}>
+          <div className='relative rounded-lg border-transparent dark:border-[#5f5f5f] dark:hover:border-gray-500 dark:bg-[#424242] flex flex-col items-center border-2  hover:border-[#00C2E4]/25'>
+            <button className='bg-zinc-100 dark:bg-[#424242] py-1 px-2 rounded-lg' onClick={handleSortDate}>
               {isAscending ? (
                 <BsSortNumericDownAlt className='text-black dark:text-white h-8' />
               ) : (
@@ -66,7 +66,7 @@ export default function Blog() {
             </button>
           </div>
           <div className='relative rounded-lg w-[170px] flex flex-col items-center my-2'>
-            <button onClick={() => setIsOpen(prev => !prev)} className='flex items-center w-full dark:border-[#313a51] dark:bg-[#030712] bg-zinc-100 p-0 pl-2 justify-between text-sm rounded-lg border-2 border-transparent hover:border-[#00C2E4]/25 active:border-[#00C2E4]/25 duration-300 active:text-[#00C2E4]/25'>
+            <button onClick={() => setIsOpen(prev => !prev)} className='flex dark:border-[#5f5f5f] dark:hover:border-gray-500 dark:bg-[#424242] items-center w-full  bg-zinc-100 p-0 pl-2 justify-between text-sm rounded-lg border-2 border-transparent hover:border-[#00C2E4]/25 active:border-[#00C2E4]/25 duration-300 active:text-[#00C2E4]/25'>
               {filter || 'All Categories'}
               {isOpen ? <IoIosArrowUp className='text-black h-8 pr-1' /> : <IoIosArrowDown className='text-black h-8 pr-1' />}
             </button>
@@ -81,7 +81,7 @@ export default function Blog() {
         </div>
 
         {blogs.map((post) => (
-          <div key={post.id} className="mb-10 p-6 shadow-lg rounded-lg dark:bg-[#030712] dark:border-[#313a51] bg-white cursor-pointer border-2 border-transparent hover:border-[#00C2E4]/25" onClick={() => router.push(`/blogs/${post.id}`)}>
+          <div key={post.id} className="mb-10 p-6 dark:hover:border-gray-500 shadow-lg rounded-lg  border-transparent dark:border-[#5f5f5f]  dark:bg-[#424242] bg-white cursor-pointer border-2  hover:border-[#00C2E4]/25" onClick={() => router.push(`/blogs/${post.id}`)}>
             <img src={post.image} alt={post.title} className="w-full h-64 object-cover rounded-t-lg" />
             <div className="p-6">
               <h2 className="text-3xl font-bold dark:text-white text-gray-900">{post.title}</h2>

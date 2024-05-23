@@ -52,7 +52,7 @@ const SecondSidebar: React.FC<SecondSidebarProps> = ({ isDashboardOpen, closeDas
   return (
     <>
       {isDashboardOpen && (
-        <div className="fixed inset-0 bg-opacity-50 transition-opacity duration-700 ease-in-out" onClick={closeDashboard}>
+        <div className="fixed inset-0 bg-opacity-50 z-50 transition-opacity duration-700 ease-in-out" onClick={closeDashboard}>
              <div className="fixed top-0 left-0 w-10/12 h-full bg-[#faebd7] rounded-lg shadow-lg z-50 transition-transform duration-700 ease-in-out" >
               <div className="flex justify-start bg-[#F9B823] p-4 items-center mb-2 hover:border-blue-50 "onClick={handleBackClick}>
                 <MdOutlineArrowBackIos className="text-black mr-1" />

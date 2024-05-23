@@ -5,7 +5,7 @@ export default function Component() {
   const pathname = usePathname()
   const pathnames = pathname.split('/').filter(x => x)
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-2 bg-zinc-100 dark:bg-[#030712] border border-transparent dark:border-[#313a51] shadow-md rounded-sm font-sans ">
+    <div className="w-full max-w-6xl  border border-transparent dark:border-[#5f5f5f]  mx-auto px-4 py-2 bg-zinc-100 dark:bg-[#424242] shadow-md rounded-sm font-sans ">
       <nav aria-label="Breadcrumb">
         <ol className="flex space-x-2 text-sm">
           <li>

@@ -22,7 +22,7 @@ export default function ServicePage() {
     {
       title: 'Computer AMC',
       subtitle: 'Subtitle for Computer AMC',
-      description: 'Reliable and comprehensive Computer AMC services are readily available for you in Bahrain, ensuring optimal performance.',
+      description: "Nexcel is one of the leading IT Companies in Bahrain. Our unique IT support services cover the entire kingdom and offers the best solution for organizations that need comprehensive IT Support for maintenance of their IT equipment. Companies that either don’t have the time, skill-set or simply just don’t want the burden of managing an IT person, department, or in some situations – an entire IT division look upon us for offering fanatic IT Support services Whether it is setting up IT infrastructure, maintenance of your IT equipment or connectivity that networks your offices on a single platform, we provide comprehensive, upgradable, cost effective & hassle free IT solutions across Bahrain. Our AgentNeWhere service is designed for customers who don’t have an expert in-house IT Support function and who prefer to focus their management energies elsewhere. With this service we take full responsibility of our customers overall IT requirements, managing day to day IT support, providing long term advice regarding IT related business issues and delivering exceptional value. We at Nexcel offer full-fledged Annual Maintenance Contracts Servers , Computers, Networks, MACs and Phone Systems. With a dedicated division for IT Support Services, a team of certified Customer Support Engineers and a dedicated IT Support Desk, we guarantee minimum down time. Don’t be put off if you’re not a multinational! A large proportion of our maintenance business is with SME, some of which have been with us for over number of years.",
       features: [
         {
           title: 'Benefit 1',
@@ -114,20 +114,20 @@ export default function ServicePage() {
             </div>
           </div>
         </div>
-        <div className='py-2 px-2 mb-24 mt-24  dark:bg-[#030712] dark:border-[#313a51] border border-transparent' >
-          <div className='mb-16 mt-16 '>
+        <div className='py-2 dark:bg-transparent   border border-transparent' >
+          <div className='mb-16 mt-16  border border-transparent '>
             <div className=''>
-              <h1 className='text-black text-3xl miniphone:text-xl font-bold mb-1 text-center dark:text-white'>{service.title}</h1>
-              <h2 className='text-black text-xl mb-1 text-center dark:text-gray-300'>Installation Across Bahrain !</h2>
+              <h1 className='text-black  tablet:text-3xl miniphone:text-xl font-bold mb-1 text-left dark:text-white '>{service.title}</h1>
+              <h2 className='text-black text-4xl mb-1 text-left dark:text-gray-300'>Installation Across Bahrain !</h2>
             </div>
-            <div className=''>
-              <p className='text-lg text-center'>
+            <div className='mt-2'>
+              <p className='text-[16px] dark:text-gray-400 text-gray-700 text-left'>
                 {service.description}
               </p>
             </div>
           </div>
           <div className=''>
-            <h2 className='text-3xl font-bold mb-4 text-center'>Key Benefits</h2>
+            <h2 className='text-3xl font-bold mb-4 text-left'>Key Benefits</h2>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
               {service.features.map((feature, index) => (
                 <motion.div key={index} className='bg-white  rounded-lg p-6 shadow-md' whileHover={{

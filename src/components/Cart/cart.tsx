@@ -10,7 +10,7 @@ export default function Component() {
   return (
     <>
       <div className="max-w-6xl mx-auto mb-8 font-sans">
-        <Card>
+        <Card className="dark:bg-[#424242]">
           <CardHeader>
             <CardTitle>Summary</CardTitle>
             <CardDescription>Review your items</CardDescription>
@@ -48,7 +48,7 @@ export default function Component() {
             <div className="ml-auto font-semibold">$167.00</div>
           </CardFooter>
         </Card>
-        <Card>
+        <Card className="dark:bg-[#424242]">
           <CardHeader>
             <CardTitle>Shipping information</CardTitle>
           </CardHeader>
@@ -97,7 +97,7 @@ export default function Component() {
             </form>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="dark:bg-[#424242]">
           <CardHeader>
             <CardTitle>Payment information</CardTitle>
           </CardHeader>

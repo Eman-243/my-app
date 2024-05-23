@@ -64,7 +64,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
             ))}
           </div>
         </div>
-        <div className="space-y-4 bg-zinc-100 dark:bg-[#030712] border border-transparent dark:border-[#313a51] p-4 flex flex-col justify-between">
+        <div className="space-y-4 bg-zinc-100  border border-transparent dark:border-[#5f5f5f]  dark:bg-[#424242] p-4 flex flex-col justify-between">
           <div>
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <div className="flex items-center space-x-2">
@@ -72,7 +72,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
               <span className="text-sm">Inclusive of VAT</span>
             </div>
             <div className="border-t border-gray-200 pt-4">
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s.
               </p>

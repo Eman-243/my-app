@@ -50,7 +50,7 @@ export default function Component() {
         <div className="flex flex-wrap justify-center gap-4 ">
           {products.map((product, index) => (
             <Link href={`/productList/${product.category}/${product.subcategory}/${product.id}`} key={product.id}>
-              <motion.div className="p-4 border dark:hover:bg-slate-800 dark:bg-slate-800 border-gray-200 rounded-lg shadow-md flex flex-col items-center  w-full sm:w-full miniphone:w-40 dark:border-[#313a51] " whileHover={{
+              <motion.div className="p-4 border dark:hover:bg-[#424242] dark:bg-[#424242] border-transparent dark:border-[#5f5f5f]   border-gray-200 rounded-lg shadow-md flex flex-col items-center  w-full sm:w-full miniphone:w-40  " whileHover={{
                 position: 'relative',
                 zIndex: 1,
                 

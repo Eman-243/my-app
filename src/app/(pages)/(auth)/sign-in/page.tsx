@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button"
 
 export default function Component() {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center h-full max-w-6xl mx-auto font-sans px-4 py-6 mt-10">
-      <div className="w-full max-w-md">
+    <div className="flex flex-col lg:flex-row items-center justify-center  max-w-6xl mx-auto font-sans px-4 py-6 my-10 ">
+      <div className="w-full max-w-md ">
         <h1 className="text-4xl font-bold text-center mb-10">Welcome</h1>
-        <form className="space-y-4">
+        <form className="space-y-4 ">
           <div>
             <label className="sr-only" htmlFor="email">
               Email Address

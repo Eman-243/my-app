@@ -58,7 +58,7 @@ export default function Component() {
 
             <div className="tablet:grid grid-cols-2 grid-rows-3 gap-4">
                 <motion.section
-                    className="bg-gradient-to-l from-[#F9B823] dark:from-[#030712] rounded-r-full p-4 flex items-center justify-center"
+                    className="bg-gradient-to-l from-[#F9B823] dark:from-[#424242] rounded-r-full p-4 flex items-center justify-center"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     whileHover={{ y: -10, opacity: 1 }}
@@ -73,7 +73,7 @@ export default function Component() {
                 </motion.section>
 
                 <motion.section
-                    className=" bg-gradient-to-r from-[#F9B823] dark:from-[#030712] rounded-l-full flex items-center justify-center p-6"
+                    className=" bg-gradient-to-r from-[#F9B823] dark:from-[#424242]  rounded-l-full flex items-center justify-center p-6"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     whileHover={{ y: -10, opacity: 1 }}
@@ -88,7 +88,7 @@ export default function Component() {
                 </motion.section>
 
                 <motion.section
-                    className="bg-gradient-to-l  from-[#F9B823] dark:from-[#030712] rounded-r-full p-4 flex items-center justify-center"
+                    className="bg-gradient-to-l  from-[#F9B823] dark:from-[#424242] rounded-r-full p-4 flex items-center justify-center"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     whileHover={{ y: -10, opacity: 1 }}

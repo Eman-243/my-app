@@ -2,3 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Autofill styles for light mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  text-fill-color: black !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  box-shadow: 0 0 0 30px white inset !important;
+}
+
+/* Autofill styles for dark mode */
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  text-fill-color: black !important;
+  -webkit-box-shadow: 0 0 0 30px #dddddd inset !important;
+  box-shadow: 0 0 0 30px #dddddd inset !important;
+}

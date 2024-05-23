@@ -70,7 +70,7 @@ export default function Component() {
                 src={urls[index]}
                 muted
               />
-              <button className="bg-white  text-black miniphone:text-[12px]  dark:bg-slate-800 dark:text-white border border-transparent tablet:text-xl font-semibold py-2 px-4 rounded hover:bg-[#F9B823] hover:text-white">
+              <button className="bg-white  text-black miniphone:text-[12px]  dark:bg-[#424242] dark:text-white border border-transparent tablet:text-xl font-semibold py-2 px-4 rounded hover:bg-[#F9B823] hover:text-white">
                 {buttonNames[index]}
               </button>
             </div>
