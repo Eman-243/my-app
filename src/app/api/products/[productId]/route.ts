@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
-    const productID = req.nextUrl.pathname;
+    const productID = req.nextUrl.pathname.split("/")[3];
     if (!productID) {
       return NextResponse.json(
         {

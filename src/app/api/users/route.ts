@@ -31,62 +31,26 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const user = cookies().get("user")?.value;
-    if (!user) {
-      return NextResponse.json(
-        {
-          message: "Unauthorized",
-        },
-        {
-          status: 401,
-        }
-      );
-    }
-
-    if (!body) {
-      return NextResponse.json(
-        {
-          message: "Invalid request",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    const product = await prisma.product.create({
+    const { name, email, password, role } = body;
+    const user = await prisma.user.create({
       data: {
-        BrandId: body.BrandId,
-        CategoryId: body.CategoryId,
-        Short_Description: body.Short_Description,
-        Long_Description: body.Long_Description,
-        Price: body.Price,
-        ProductName: body.ProductName,
-        Show_price: body.Show_price,
-        VAT: body.VAT,
-        Model: body.Model,
-        Discount_Amount: body.Discount_Amount,
+        UserName: name,
+        Email: email,
+        Password: password,
+        RoleID: role,
       },
     });
     prisma.$disconnect();
     return NextResponse.json(
       {
-        message: "Product created successfully",
-        data: product,
+        message: "User created successfully",
+        data: user,
       },
       {
         status: 201,
       }
     );
   } catch (error) {
-    return NextResponse.json(
-      {
-        message: "An error occurred",
-        error: error,
-      },
-      {
-        status: 500,
-      }
-    );
+    
   }
 }

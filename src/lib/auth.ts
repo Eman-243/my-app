@@ -69,6 +69,15 @@ export async function login(formData: FormData) {
     expires,
     httpOnly: true,
   });
+  cookies().set("role", user.RoleID.toString(), {
+    expires,
+    httpOnly: true,
+  });
+  cookies().set("userId", user.UserID.toString(), {
+    expires,
+    httpOnly: true,
+  });
+
   return true;
   // Redirect to the tickets page
 }
@@ -79,6 +88,14 @@ export async function logout() {
     httpOnly: true,
   });
   cookies().set("user", "", {
+    expires: new Date(0),
+    httpOnly: true,
+  });
+  cookies().set("role", "", {
+    expires: new Date(0),
+    httpOnly: true,
+  });
+  cookies().set("userId", "", {
     expires: new Date(0),
     httpOnly: true,
   });
