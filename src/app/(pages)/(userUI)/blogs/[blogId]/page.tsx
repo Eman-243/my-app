@@ -1,6 +1,12 @@
 "use client";
 import React from 'react';
 import { useParams } from 'next/navigation';
+interface blogPost {
+    id: string;
+    title: string;
+    description: string;
+    date: string;
+}
 
 const blogPosts = [
     {
@@ -25,11 +31,15 @@ export default function Blog() {
     const { blogId } = useParams();
     const blog = blogPosts.find(b => b.id === blogId);
 
-    if (!blog) {
-        console.log("Blog ID not found:", blogId);
-        return <div>Blog not found</div>;
-    }
-
+   
+if(!blog)    return (
+    <div className="flex flex-col items-center justify-center h-full  m-auto  text-black p-8 rounded-lg">
+        <div className="max-w-xl">
+        <h2 className="font-sans text-center">Blog Not Found</h2>
+        <p className="text-center font-sans mt-2">The Blog you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        </div>
+    </div>
+);;
 
     return (
         

@@ -18,6 +18,7 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { TbSpy } from "react-icons/tb";
 import Link from 'next/link';
 
+
 interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
 export default function Component() {
@@ -116,6 +117,8 @@ export default function Component() {
 
 
   ];
+
+  
 
   return (
     <div className="mx-auto max-w-6xl">

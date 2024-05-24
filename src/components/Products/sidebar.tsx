@@ -13,7 +13,7 @@ interface ComponentProps {
 }
 
 // Define the component
-export default function Component({ selectedCategory, setSelectedCategory, selectedSubcategory, setSelectedSubcategory }: ComponentProps) {
+export default function Component({ setSelectedCategory, setSelectedSubcategory }: ComponentProps) {
     // State to keep track of which categories are expanded
     const [expandedCategories, setExpandedCategories] = useState<Array<boolean>>([]);
 
@@ -66,13 +66,6 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
         if (!category || !subcategory) {
             return;
         }
-    
-        // Log the category and subcategory
-        console.log('useEffect running');
-        console.log('category from URL:', category);
-        console.log('subcategory from URL:', subcategory);
-        // Update the selected category and subcategory
-        console.log('setting category and subcategory');
         setSelectedCategory(category);
         setSelectedSubcategory(subcategory);
         const categoryIndex = categories.findIndex((cat) => cat.name === category);
@@ -84,7 +77,7 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
             setExpandedCategories(newExpandedCategories);
         }
     }, [category, subcategory]); // Run this effect whenever the category or subcategory changes
-
+ 
 
     return (
         <div className="w-full max-w-50 min-h-scree   dark:border-[#5f5f5f]  dark:bg-[#424242] bg-zinc-100 border border-transparent  shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
