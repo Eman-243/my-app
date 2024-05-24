@@ -43,7 +43,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 />
             </div>
             <div className="col-span-10 w-full ">
-                <Topbar />
                 <Products
                     selectedCategory={selectedCategory}
                     selectedSubcategory={selectedSubcategory}
@@ -55,7 +54,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="w-full max-w-6xl mx-auto py-2 box-content miniphone:flex tablet:hidden h-full ">
             <div className="col-span-10 w-full ">
-                <Topbar />
                 <Products
                     selectedCategory={selectedCategory}
                     selectedSubcategory={selectedSubcategory}
