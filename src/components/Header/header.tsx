@@ -7,6 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { TfiMenu } from "react-icons/tfi";
 import { useRouter } from "next/navigation";
 import FirstSidebar from "@/components/Header/ui/firstSidebar";
+import Img from "next/image";
 
 
 export const products = [
@@ -52,7 +53,7 @@ export default function Component() {
   const router = useRouter();
   const suggestionMenuRef = useRef<HTMLDivElement>(null);
 
- 
+
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };
@@ -131,102 +132,102 @@ export default function Component() {
         <div className="flex justify-between items-baseline lg:p-0 px-4">
           <div className="mx-auto flex w-full sm:max-w-6xl miniphone:items-center minitablet:items-baseline tablet:items-baseline sm:
 items-baseline justify-around">
-<button className="tablet:hidden pr-4" onClick={toggleSidebar}>
-  <TfiMenu className="text-white h-7 w-7" />
-</button>
-<div className="flex items-baseline miniphone:items-center h-20 w-20 lg:h-24 miniscreen:w-24 lg:w-16 miniphone:h-14 phone:h-16 phone:w-11 miniphone:w-11 pt-1 miniphone:mb-6 phone:mb-5 miniphone:mr-2 phone-mr-2">
-  <img src="/logo1.png" alt="logo" />
-</div>
-</div>
-<nav className="hidden space-x-4 ml-5 tablet:flex">
-<Link
-  href="/"
-  className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
->
-  Home
-</Link>
-<Link
-  href="/services"
-  className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
->
-  Services
-</Link>
-<Link
-  href="/blogs"
-  className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
->
-  Blog
-</Link>
-<Link
-  href="/products"
-  className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
->
-  Shop
-</Link>
-</nav>
-</div>
-<div className="flex justify-center items-center relative tablet:w-60 miniscreen:w-96 lg:w-80 phon:my-0 sm:my-3 miniphone:w-52 miniphone:h-10">
-<Input
-className="pl-10 w-full"
-placeholder="Search"
-type="search"
-value={searchQuery}
-onChange={e => setSearchQuery(e.target.value)}
-onKeyDown={handleKeyDown}
-/>
-<IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
-{suggestions.length > 0 && (
-<div className="absolute top-full mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10" ref={suggestionMenuRef}>
-<ul>
-  {suggestions.map((suggestion, index) => (
-    <li
-      key={index}
-      className={`px-4 py-2 hover:bg-gray-200 cursor-pointer ${
-        activeSuggestionIndex === index ? "bg-gray-200" : ""
-      }`}
-      onClick={() => handleSuggestionClick(suggestion)}
-    >
-      {suggestion.name}
-    </li>
-  ))}
-</ul>
-</div>
-)}
-</div>
-<Link
-href="/cart"
-className="minitablet:hidden items-baseline miniphone:flex lg:mb-auto tablet:mb-auto text-bottom px-4"
->
-<RiShoppingCartLine className="text-white mb-auto miniphone:h-7 miniphone:w-7" />
-</Link>
-<div className="hidden items-baseline minitablet:flex space-x-4 ml-6 h-full">
-<Link
-href="/cart"
-className="items-baseline lg:mb-auto tablet:mb-auto text-bottom"
->
-<RiShoppingCartLine className="text-white lg:h-6 lg:w-6 sm:h-5 sm:w-5" />
-</Link>
-<Link
-href="/sign-in"
-className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
->
-Sign In
-</Link>
-<Link
-href="/about-us"
-className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
->
-About Us
-</Link>
-<Link
-href="/english"
-className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
->
-English
-</Link>
-</div>
-<FirstSidebar sidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} />
-</div>
-</header>
-);
+            <button className="tablet:hidden pr-4" onClick={toggleSidebar}>
+              <TfiMenu className="text-white h-7 w-7" />
+            </button>
+            <div className="flex items-baseline miniphone:items-center h-20 w-20 lg:h-24 miniscreen:w-24 lg:w-16 miniphone:h-14 phone:h-16 phone:w-11 miniphone:w-11 pt-1 miniphone:mb-6 phone:mb-5 miniphone:mr-2 phone-mr-2">
+  
+             <Img src="/logo1.png" alt="logo" width={70} height={70} />
+            </div>
+          </div>
+          <nav className="hidden space-x-4 ml-5 tablet:flex">
+            <Link
+              href="/"
+              className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
+            >
+              Home
+            </Link>
+            <Link
+              href="/services"
+              className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
+            >
+              Services
+            </Link>
+            <Link
+              href="/blogs"
+              className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/products"
+              className="text-white hover:text-gray-300 tablet:text-[12px] sm:text-base lg:text-lg"
+            >
+              Shop
+            </Link>
+          </nav>
+        </div>
+        <div className="flex justify-center items-center relative tablet:w-60 miniscreen:w-96 lg:w-80 phon:my-0 sm:my-3 miniphone:w-52 miniphone:h-10">
+          <Input
+            className="pl-10 w-full"
+            placeholder="Search"
+            type="search"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+          {suggestions.length > 0 && (
+            <div className="absolute top-full mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10" ref={suggestionMenuRef}>
+              <ul>
+                {suggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    className={`px-4 py-2 hover:bg-gray-200 cursor-pointer ${activeSuggestionIndex === index ? "bg-gray-200" : ""
+                      }`}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+        <Link
+          href="/cart"
+          className="minitablet:hidden items-baseline miniphone:flex lg:mb-auto tablet:mb-auto text-bottom px-4"
+        >
+          <RiShoppingCartLine className="text-white mb-auto miniphone:h-7 miniphone:w-7" />
+        </Link>
+        <div className="hidden items-baseline minitablet:flex space-x-4 ml-6 h-full">
+          <Link
+            href="/cart"
+            className="items-baseline lg:mb-auto tablet:mb-auto text-bottom"
+          >
+            <RiShoppingCartLine className="text-white lg:h-6 lg:w-6 sm:h-5 sm:w-5" />
+          </Link>
+          <Link
+            href="/sign-in"
+            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+          >
+            Sign In
+          </Link>
+          <Link
+            href="/about-us"
+            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/english"
+            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+          >
+            English
+          </Link>
+        </div>
+        <FirstSidebar sidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} />
+      </div>
+    </header>
+  );
 }

@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { useParams } from 'next/navigation';
+import Img from 'next/image';
 interface blogPost {
     id: string;
     title: string;
@@ -44,7 +45,7 @@ if(!blog)    return (
     return (
         
         <div className="max-w-6xl w-auto mx-auto py-4 flex  flex-col items-center justify-between h-full">
-            <img src={blog.imageUrl} alt={blog.title} className="w-full h-full object-cover object-center"/>
+            <Img src={blog.imageUrl} alt={blog.title} width={500} height={500} className="w-full h-full object-cover object-center"/>
 
             <div className="bg-white dark:border-[#5f5f5f]  dark:bg-transparent mt-2 border border-transparent shadow-lg rounded-lg h-svh">
                 <div className="p-4">

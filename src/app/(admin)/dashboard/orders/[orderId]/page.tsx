@@ -2,8 +2,6 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-
 
 export default function Orders() {
   const [orders, setOrders] = useState([
@@ -25,8 +23,8 @@ export default function Orders() {
               <p>Total: ${order.total}</p>
               <p>Status: {order.status}</p>
             </div>
-            <Link href={`/dashboard/orders/${order.id}`}>
-              <Button className="text-blue-500">View Details</Button>
+            <Link href={`/admin/dashboard/orders/${order.id}`}>
+              <a className="text-blue-500">View Details</a>
             </Link>
           </li>
         ))}
@@ -34,5 +32,3 @@ export default function Orders() {
     </div>
   );
 }
-
-// Compare this snippet from src/app/%28admin%29/dashboard/orders/page.tsx:

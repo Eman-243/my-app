@@ -3,6 +3,7 @@ import React from "react";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FaRegHeart } from "react-icons/fa6";
+import Img from "next/image";
 
 
 
@@ -64,7 +65,7 @@ export default function Component() {
                 <div className="self-end">
                   <FaRegHeart className="text-[#F9B823] w-6 h-6" />
                 </div>
-                <img
+                <Img
                   alt={product.name}
                   className="mb-4"
                   height="150"

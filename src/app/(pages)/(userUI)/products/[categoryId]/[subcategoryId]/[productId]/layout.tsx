@@ -1,14 +1,13 @@
+import { ReactNode } from 'react';
 
-import Productdetails from '@/components/Products/productDetails';
+interface ProductDetailLayoutProps {
+  children: ReactNode;
+}
 
-export default function ProductDetailLayout({ productId, children }: { productId: string, children: React.ReactNode }) {
+export default function ProductDetailLayout({ children }: ProductDetailLayoutProps) {
   return (
     <div>
-      <Productdetails productId={productId} />
       {children}
-      
     </div>
   );
 }
-
-//pages/productList/[categoryId]/[subcategoryId]/[productId]/layout.tsx

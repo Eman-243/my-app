@@ -102,3 +102,4 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </>
     );
 }
+//app/pages/(userUI)/products/layout.tsx

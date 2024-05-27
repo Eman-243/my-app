@@ -1,5 +1,6 @@
 import React from "react";
 import { FaWhatsapp, FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
+import Img from "next/image";
 
 interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
@@ -8,13 +9,14 @@ export default function Footer() {
     <footer className="bg-[#000000] text-white bottom-0 w-full font-sans relative ">
       <div className=" mx-auto tablet:py-8 py-4 flex tablet:justify-around max-w-6xl miniphone:justify-center ">
         <div className="flex flex-col sm:flex-row miniphone:items-center tablet:items-start"> {/* Flex container for logo and contact */}
-          <img
+          <Img
             alt="Logo"
             className="h-20 w-20 tablet:h-24 tablet:w-24 mb-4 sm:mb-0 sm:mr-4"
             src="/logo2.png"
             style={{
               objectFit: "fill",
             }}
+            width={70} height={70}
           />
           <div>
             <h2 className="tablet:text-lg font-semibold mb-2 tablet:text-left text-center text-sm" style={{ color: "#F9B823" }}>WELCOME TO NEXCEL</h2>

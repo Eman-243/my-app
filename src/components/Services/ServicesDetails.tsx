@@ -17,9 +17,9 @@ import { SiMicrosoftstore } from "react-icons/si";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { TbSpy } from "react-icons/tb";
 import Link from 'next/link';
+import Img from "next/image";
 
 
-interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
 export default function Component() {
   const services = [
@@ -152,17 +152,19 @@ export default function Component() {
 
 <section className="py-8 md:py-16 px-4 lg:py-16">
   <div className="flex flex-col lg:flex-row items-center lg:justify-between">
-    <img
-      src="services/Maskgroup.png"
+    <Img
+      src="/services/Maskgroup.png"
       alt="IT Solutions"
       className="w-full lg:w-1/2 h-auto"
+      width={600}
+      height={400}
     />
     <div className="lg:w-1/2 lg:pl-8">
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-center lg:text-left py-1 md:py-3 lg:py-6">
         Redefining IT Solutions with Nexcel
       </h2>
       <p className="mx-auto lg:mx-0 text-gray-500 dark:text-gray-400 text-base md:text-lg lg:text-xl text-center lg:text-left">
-        In today's digital age, trustworthy IT services are crucial for business growth. At Nexcel, we provide reliable services that simplify complex IT challenges. Choose Nexcel for efficient IT solutions.
+        In todays digital age, trustworthy IT services are crucial for business growth. At Nexcel, we provide reliable services that simplify complex IT challenges. Choose Nexcel for efficient IT solutions.
       </p>
     </div>
   </div>
@@ -170,10 +172,12 @@ export default function Component() {
 
 <section className="py-8 md:py-16 px-4 lg:py-16">
   <div className="flex flex-col lg:flex-row-reverse items-center lg:justify-between">
-    <img
-      src="services/servicesBack.png"
+    <Img
+      src="/services/servicesBack.png"
       alt="IT Support"
       className="w-full lg:w-1/2 h-auto rounded-[10px]"
+      width={1000}
+      height={1000}
     />
     <div className="lg:w-1/2 lg:pr-8">
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-center lg:text-right py-1 md:py-3 lg:py-6">

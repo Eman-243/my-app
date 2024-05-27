@@ -28,6 +28,7 @@ export default function Component() {
   };
 
   useEffect(() => {
+    const currentRefs = videoRefs.current;
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
@@ -40,14 +41,14 @@ export default function Component() {
       });
     });
 
-    videoRefs.current.forEach((ref) => {
+    currentRefs.forEach((ref) => {
       if (ref.current) {
         observer.observe(ref.current);
       }
     });
 
     return () => {
-      videoRefs.current.forEach((ref) => {
+      currentRefs.forEach((ref) => {
         if (ref.current) {
           observer.unobserve(ref.current);
         }
@@ -65,12 +66,13 @@ export default function Component() {
               <video 
                 id={`video-${index}`} 
                 ref={ref} 
-                className="w-full h-full shadow-lg  rounded-t-lg"
+                className="w-full h-full shadow-lg rounded-t-lg"
                 onMouseOver={() => handleMouseOver(index)}
+                onMouseOut={() => handleMouseOut(index)} // Add onMouseOut to reset video state
                 src={urls[index]}
                 muted
               />
-              <button className="bg-white  text-black miniphone:text-[12px]  dark:bg-[#424242] dark:text-white border border-transparent tablet:text-xl font-semibold py-2 px-4 rounded hover:bg-[#F9B823] hover:text-white">
+              <button className="bg-white text-black miniphone:text-[12px] dark:bg-[#424242] dark:text-white border border-transparent tablet:text-xl font-semibold py-2 px-4 rounded hover:bg-[#F9B823] hover:text-white">
                 {buttonNames[index]}
               </button>
             </div>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import Img from 'next/image';
 
 type Categories = {
   [key: string]: string[];
@@ -132,7 +133,7 @@ export default function EditProduct() {
       )}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Product Image</label>
-        {imagePreview && <img src={imagePreview} alt="Product Image" className="my-4 w-32 h-32 object-cover" />}
+        {imagePreview && <Img src={imagePreview} alt="Product Image" width={100} height={100} className="my-4 w-32 h-32 object-cover" />}
         <input type="file" onChange={handleImageChange} />
       </div>
       <Button onClick={handleEditProduct} variant="default">

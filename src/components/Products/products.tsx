@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaFilter } from 'react-icons/fa';
 import Select, { SingleValue, MultiValue } from 'react-select';
+import Img from 'next/image';
 
 const sortOptions = [
     { value: 'most-relevant', label: 'Most Relevant' },
@@ -15,9 +16,7 @@ const colorOptions = [
     { value: 'green', label: 'Green' }, 
     { value: 'yellow', label: 'Yellow' }, 
     { value: 'black', label: 'Black' }, 
-    { value: 'sliver', label: 'Sliver' }, 
-
-
+    { value: 'silver', label: 'Silver' }, 
 ];
 
 const brandOptions = [
@@ -79,23 +78,24 @@ export default function ProductList({ selectedCategory, selectedSubcategory }: {
 
     useEffect(() => {
         setIsLoading(false);
+
+        const applyFilters = () => {
+            let filtered = products;
+            if (selectedCategory && selectedSubcategory) {
+                filtered = products.filter(product => product.category === selectedCategory && product.subcategory === selectedSubcategory);
+            }
+            if (selectedColors.length > 0) {
+                filtered = filtered.filter(product => selectedColors.includes(product.color.toLowerCase()));
+            }
+            if (selectedBrands.length > 0) {
+                filtered = filtered.filter(product => selectedBrands.includes(product.brand.toLowerCase()));
+            }
+            filtered = sortProducts(filtered, sortType);
+            setFilteredProducts(filtered);
+        };
+
         applyFilters();
     }, [selectedCategory, selectedSubcategory, sortType, selectedColors, selectedBrands]);
-
-    const applyFilters = () => {
-        let filtered = products;
-        if (selectedCategory && selectedSubcategory) {
-            filtered = products.filter(product => product.category === selectedCategory && product.subcategory === selectedSubcategory);
-        }
-        if (selectedColors.length > 0) {
-            filtered = filtered.filter(product => selectedColors.includes(product.color.toLowerCase()));
-        }
-        if (selectedBrands.length > 0) {
-            filtered = filtered.filter(product => selectedBrands.includes(product.brand.toLowerCase()));
-        }
-        filtered = sortProducts(filtered, sortType);
-        setFilteredProducts(filtered);
-    };
 
     const sortProducts = (products: Product[], sortType: string): Product[] => {
         switch (sortType) {
@@ -117,13 +117,11 @@ export default function ProductList({ selectedCategory, selectedSubcategory }: {
 
     const handleApplyFilter = () => {
         setShowFilterModal(false);
-        applyFilters();
     };
 
     const handleResetFilter = () => {
         setSelectedColors([]);
         setSelectedBrands([]);
-        applyFilters();
     };
 
     if (isLoading) {
@@ -161,7 +159,7 @@ export default function ProductList({ selectedCategory, selectedSubcategory }: {
                         <Link href={`/products/${product.category}/${product.subcategory}/${product.id}`} key={product.id} className="w-full rounded-lg sm:w-auto">
                             <div className="border w-full flex flex-col items-center justify-between dark:border-transparent rounded-t-md rounded-b-[10px] dark:bg-[#dddddd] bg-white h-full">
                                 <HeartIcon className="self-end text-[#F9B823] pt-1 pr-1 w-6 h-6" />
-                                <img
+                                <Img
                                     alt={product.name}
                                     className="mb-4"
                                     src={product.image}
@@ -169,6 +167,8 @@ export default function ProductList({ selectedCategory, selectedSubcategory }: {
                                         aspectRatio: "214/150",
                                         objectFit: "cover",
                                     }}
+                                    width={214}
+                                    height={150}
                                 />
                                 <div className="grid grid-cols-3 py-[2px] text-center items-baseline justify-between w-full dark:bg-[#dddddd] rounded-full bg-zinc-100 shadow-lg">
                                     <div className='col-span-2 '>
@@ -230,6 +230,7 @@ export default function ProductList({ selectedCategory, selectedSubcategory }: {
         </div>
     );
 }
+
 
 function HeartIcon(props: React.SVGProps<SVGSVGElement>) {
     return (

@@ -8,6 +8,7 @@ import { FaRegHeart } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import Img from 'next/image';
 
 
 
@@ -130,7 +131,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
       <div className=" my-12 rounded-sm font-sans shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white">
-            <img
+            <Img
               alt={product.name}
               className="w-full h-auto object-contain"
               height="500"
@@ -142,12 +143,13 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
             />
             <div className="flex space-x-2 mt-4">
               {product.images.map((image, index) => (
-                <img
+                <Img
                   key={index}
                   alt={product.name}
                   className="w-20 h-20 object-contain cursor-pointer"
                   src={image}
                   onClick={() => setSelectedImage(image)}
+                  width={80} height={80}
                 />
               ))}
             </div>
@@ -162,7 +164,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
               <div className="border-t border-gray-200 pt-4">
                 <p className="text-gray-600 dark:text-gray-300">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry's standard dummy text ever since the 1500s.
+                  industrys standard dummy text ever since the 1500s.
                 </p>
               </div>
             </div>
@@ -195,8 +197,8 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
           {activeTab === 'description' ? (
             <div className="text-gray-600 dark:text-gray-300">
               <p className="text-gray-600 dark:text-gray-300">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s.
+                Lorem Ipsum is simply dummy text of the printingandtypesetting industryLorem Ipsum has been the
+                industrys standard dummy text ever since the 1500s.
               </p>
               {/* Description content */}
             </div>
@@ -268,7 +270,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                   <div className="self-end">
                     <FaRegHeart className="text-[#F9B823] w-6 h-6" />
                   </div>
-                  <img
+                  <Img
                     alt={relatedProduct.name}
                     className="mb-4"
                     height="150"
