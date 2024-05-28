@@ -6,9 +6,9 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import React, { useState, useEffect, useRef } from "react";
 import { TfiMenu } from "react-icons/tfi";
 import { useRouter } from "next/navigation";
+import Router from "next/router";
 import FirstSidebar from "@/components/Header/ui/firstSidebar";
 import Img from "next/image";
-
 
 export const products = [
   {
@@ -53,7 +53,6 @@ export default function Component() {
   const router = useRouter();
   const suggestionMenuRef = useRef<HTMLDivElement>(null);
 
-
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
   };
@@ -68,7 +67,7 @@ export default function Component() {
 
   useEffect(() => {
     if (searchQuery.length > 0) {
-      const filteredSuggestions = products.filter(product =>
+      const filteredSuggestions = products.filter((product) =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setSuggestions(filteredSuggestions);
@@ -84,6 +83,7 @@ export default function Component() {
         !suggestionMenuRef.current.contains(event.target as Node)
       ) {
         setSuggestions([]);
+        setActiveSuggestionIndex(-1); // Reset active suggestion index on outside click
       }
     };
 
@@ -100,7 +100,7 @@ export default function Component() {
 
   const handleSuggestionClick = (suggestion: any) => {
     setSearchQuery(suggestion.name);
-    setSuggestions([]); // Clear suggestions after selecting one
+    setSuggestions([]); // Clear suggestions immediately after click
     setActiveSuggestionIndex(-1); // Reset active suggestion index
     const { category, subcategory } = suggestion;
     router.push(
@@ -111,11 +111,11 @@ export default function Component() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (suggestions.length > 0) {
       if (e.key === "ArrowDown") {
-        setActiveSuggestionIndex(prevIndex =>
+        setActiveSuggestionIndex((prevIndex) =>
           prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1
         );
       } else if (e.key === "ArrowUp") {
-        setActiveSuggestionIndex(prevIndex =>
+        setActiveSuggestionIndex((prevIndex) =>
           prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
         );
       } else if (e.key === "Enter" && activeSuggestionIndex >= 0) {
@@ -126,18 +126,29 @@ export default function Component() {
     }
   };
 
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setSearchQuery(""); // Clear the search input
+      setSuggestions([]);
+      setActiveSuggestionIndex(-1); // Reset active suggestion index on route change
+    };
+
+    Router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
+
   return (
     <header className="bg-black w-full">
       <div className="flex justify-center lg:justify-around tablet:items-baseline lg:max-w-6xl miniphone:max-w-7xl miniphone:items-center mx-auto">
         <div className="flex justify-between items-baseline lg:p-0 px-4">
-          <div className="mx-auto flex w-full sm:max-w-6xl miniphone:items-center minitablet:items-baseline tablet:items-baseline sm:
-items-baseline justify-around">
+          <div className="mx-auto flex w-full sm:max-w-6xl miniphone:items-center minitablet:items-baseline tablet:items-baseline sm:items-baseline justify-around">
             <button className="tablet:hidden pr-4" onClick={toggleSidebar}>
               <TfiMenu className="text-white h-7 w-7" />
             </button>
             <div className="flex items-baseline miniphone:items-center h-20 w-20 lg:h-24 miniscreen:w-24 lg:w-16 miniphone:h-14 phone:h-16 phone:w-11 miniphone:w-11 pt-1 miniphone:mb-6 phone:mb-5 miniphone:mr-2 phone-mr-2">
-  
-             <Img src="/logo1.png" alt="logo" width={70} height={70} />
+              <Img src="/logo1.png" alt="logo" width={100} height={100} />
             </div>
           </div>
           <nav className="hidden space-x-4 ml-5 tablet:flex">
@@ -173,18 +184,22 @@ items-baseline justify-around">
             placeholder="Search"
             type="search"
             value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyDown}
           />
           <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           {suggestions.length > 0 && (
-            <div className="absolute top-full mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10" ref={suggestionMenuRef}>
+            <div
+              className="absolute top-full mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10"
+              ref={suggestionMenuRef}
+            >
               <ul>
                 {suggestions.map((suggestion, index) => (
                   <li
                     key={index}
-                    className={`px-4 py-2 hover:bg-gray-200 cursor-pointer ${activeSuggestionIndex === index ? "bg-gray-200" : ""
-                      }`}
+                    className={`px-4 py-2 hover:bg-gray-200 cursor-pointer ${
+                      activeSuggestionIndex === index ? "bg-gray-200" : ""
+                    }`}
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion.name}
@@ -226,7 +241,10 @@ items-baseline justify-around">
             English
           </Link>
         </div>
-        <FirstSidebar sidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} />
+        <FirstSidebar
+          sidebarVisible={isSidebarVisible}
+          toggleSidebar={toggleSidebar}
+        />
       </div>
     </header>
   );

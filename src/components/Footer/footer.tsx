@@ -2,7 +2,6 @@ import React from "react";
 import { FaWhatsapp, FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa";
 import Img from "next/image";
 
-interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
 export default function Footer() {
   return (
