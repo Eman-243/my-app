@@ -46,7 +46,9 @@ model blogtagblog {
 model order {
   OrderId   Int     @id @default(autoincrement())
   UserID    Int
-  OrderDate String? @db.VarChar(50)
+  OrderDate DateTime? @db.Date
+  Status    String? @db.VarChar(50)
+  Total     Float?
 
   @@index([UserID], map: "FK_Order_User")
 }
@@ -73,6 +75,7 @@ model product {
   VAT               Boolean
   Show_price        Boolean? @map("Show price")
   Model             String?  @db.VarChar(50)
+  img               String?  @db.VarChar(50)
   orderProductID    Int?
 
   @@index([orderProductID], map: "IXFK_Product_Order Product")
@@ -154,7 +157,7 @@ model useraddress {
   UserAddressId Int     @id @default(autoincrement())
   Address       String? @db.VarChar(50)
   Road          String? @db.VarChar(50)
-  UserID        Int
+  UserID        Int @unique
   Block         String? @db.VarChar(50)
   Area          String? @db.VarChar(50)
 

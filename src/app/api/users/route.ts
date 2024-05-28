@@ -1,10 +1,12 @@
+import { checkAdmin } from "@/lib/info";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "prisma/prisma-client";
 const prisma = new PrismaClient();
 export async function GET() {
   try {
-    const users = await prisma.user.findMany();
+    if (await checkAdmin) {
+      const users = await prisma.user.findMany();
     prisma.$disconnect();
     return NextResponse.json(
       {
@@ -15,6 +17,16 @@ export async function GET() {
         status: 200,
       }
     );
+    } else {
+      return NextResponse.json(
+        {
+          message: "You are not authorized to access this route",
+        },
+        {
+          status: 403,
+        }
+      );
+    }
   } catch (error) {
     return NextResponse.json(
       {

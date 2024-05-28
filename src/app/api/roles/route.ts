@@ -1,65 +1,44 @@
+import { checkAdmin } from "@/lib/info";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "prisma/prisma-client";
 const prisma = new PrismaClient();
 
-export async function GET() {
-    try {
-if (!cookies().get("session")) {
-    return NextResponse.redirect("/login");       
-        }
+export async function GET(req: NextRequest) {
+    if (await checkAdmin) {
         const roles = await prisma.role.findMany();
-        prisma.$disconnect();
-        return NextResponse.json(
-            {
-                message: "Roles fetched successfully",
-                data: roles,
-            },
-            {
-                status: 200,
-            }
-        );
-    } catch (error) {
-        return NextResponse.json(
-            {
-                message: "An error occurred",
-                error: error,
-            },
-            {
-                status: 500,
-            }
-        );
+        return NextResponse.json({
+            roles: roles,
+        }, {
+            status: 200,
+        });
+    } else {
+        return NextResponse.json({
+            message: "You are not an admin",
+        }, {
+            status: 403,
+        });
     }
 }
 
 export async function POST(req: NextRequest) {
-    try {
-        const body = await req.json();
-        const { name } = body;
+    if (await checkAdmin) {
+        const { name } = await req.json();
         const role = await prisma.role.create({
             data: {
                 RoleName: name,
             },
         });
-        prisma.$disconnect();
-        return NextResponse.json(
-            {
-                message: "Role created successfully",
-                data: role,
-            },
-            {
-                status: 201,
-            }
-        );
-    } catch (error) {
-        return NextResponse.json(
-            {
-                message: "An error occurred",
-                error: error,
-            },
-            {
-                status: 500,
-            }
-        );
+        return NextResponse.json({
+            role: role,
+        }, {
+            status: 201,
+        });
+    } else {
+        return NextResponse.json({
+            message: "You are not an admin",
+        }, {
+            status: 403,
+        });
     }
 }
