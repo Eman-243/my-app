@@ -234,12 +234,7 @@ export default function Component() {
           >
             About Us
           </Link>
-          <Link
-            href="/english"
-            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
-          >
-            English
-          </Link>
+        
         </div>
         <FirstSidebar
           sidebarVisible={isSidebarVisible}
