@@ -3,6 +3,9 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { FaUserCircle } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
+import { MdOutlineMiscellaneousServices } from "react-icons/md";
+import { TfiWrite } from "react-icons/tfi";
+
 
 
 
@@ -64,14 +67,14 @@ export default function  SideBar() {
               className="flex items-center gap-3 rounded-lg px-3 pt-2 pb-6 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               href="/dashboard/services"
             >
-              <LineChartIcon className="h-4 w-4" />
+              <MdOutlineMiscellaneousServices className="h-4 w-4" />
               Services
             </Link>
             <Link
               className="flex items-center gap-3 rounded-lg px-3 pt-2 pb-6 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               href="/dashboard/blogs"
             >
-              <LineChartIcon className="h-4 w-4" />
+              <TfiWrite className="h-4 w-4" />
               Blogs
             </Link>
             <Link
