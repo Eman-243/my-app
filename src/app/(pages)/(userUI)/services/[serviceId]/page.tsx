@@ -6,6 +6,7 @@ import { usePathname  } from 'next/navigation';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {motion} from "framer-motion";
+import Img from 'next/image';
 
 
 export default function ServicePage() {
@@ -105,7 +106,7 @@ export default function ServicePage() {
     <div >
       <div className='max-w-6xl mx-auto w-auto font-sans'>
         <div className='relative'>
-          <img src={service.image} alt={service.title} className='w-full' />
+          <Img src={service.image} alt={service.title} className='w-full' width={600} height={500} />
           <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50'></div>
           <div className='absolute top-0 left-0 w-full h-full flex items-center p-4'>
             <div className='max-w-md ml-2'>
@@ -118,7 +119,7 @@ export default function ServicePage() {
           <div className='mb-16 mt-16  border border-transparent '>
             <div className=''>
               <h1 className='text-black  tablet:text-3xl miniphone:text-xl font-bold mb-1 text-left dark:text-white '>{service.title}</h1>
-              <h2 className='text-black text-4xl mb-1 text-left dark:text-gray-300'>Installation Across Bahrain !</h2>
+              <h2 className='text-black tablet:text-4xl miniphone:text-xl mb-1 text-left dark:text-gray-300'>Installation Across Bahrain !</h2>
             </div>
             <div className='mt-2'>
               <p className='text-[16px] dark:text-gray-400 text-gray-700 text-left'>

@@ -1,18 +1,57 @@
 "use client";
-import Link from "next/link"
-import { Input } from "@/components/Header/ui/input"
+import Link from "next/link";
+import { Input } from "@/components/Header/ui/input";
 import { IoSearch } from "react-icons/io5";
 import { RiShoppingCartLine } from "react-icons/ri";
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TfiMenu } from "react-icons/tfi";
-import { useEffect } from "react";
-import  FirstSidebar  from "@/components/Header/ui/firstSidebar";
-import SecondSidebar  from "@/components/Header/ui/SecondSidebar";
+import { useRouter } from "next/navigation";
+import Router from "next/router";
+import FirstSidebar from "@/components/Header/ui/firstSidebar";
+import Img from "next/image";
 
-
+export const products = [
+  {
+    images: ["/laptop2Deals.png", "/laptop2Deals.png", "/laptop2Deals.png"],
+    name: "Samsung Laptop",
+    price: "BHD 126",
+    category: "Computers",
+    subcategory: "Laptops",
+    id: "1",
+  },
+  {
+    images: ["/AsusLaptop.png", "/AsusLaptop_2.png", "/AsusLaptop_3.png"],
+    name: "Asus Laptop",
+    price: "BHD 125",
+    category: "Computers",
+    subcategory: "Laptops",
+    id: "2",
+  },
+  {
+    images: ["/iphone.png"],
+    name: "IPhone 13",
+    price: "BHD 300",
+    category: "Mobiles",
+    subcategory: "Iphone",
+    id: "3",
+  },
+  {
+    images: ["/MonitorDeals.png"],
+    name: "HP5 Monitor",
+    price: "BHD 200",
+    category: "monitors",
+    subcategory: "Laptops",
+    id: "4",
+  },
+];
 
 export default function Component() {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const router = useRouter();
+  const suggestionMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
@@ -26,6 +65,80 @@ export default function Component() {
     }
   }, [isSidebarVisible]);
 
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      const filteredSuggestions = products.filter((product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        suggestionMenuRef.current &&
+        !suggestionMenuRef.current.contains(event.target as Node)
+      ) {
+        setSuggestions([]);
+        setActiveSuggestionIndex(-1); // Reset active suggestion index on outside click
+      }
+    };
+
+    if (suggestions.length > 0) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [suggestions]);
+
+  const handleSuggestionClick = (suggestion: any) => {
+    setSearchQuery(suggestion.name);
+    setSuggestions([]); // Clear suggestions immediately after click
+    setActiveSuggestionIndex(-1); // Reset active suggestion index
+    const { category, subcategory } = suggestion;
+    router.push(
+      `/products/${category}/${subcategory}?category=${category}&subcategory=${subcategory}`
+    );
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (suggestions.length > 0) {
+      if (e.key === "ArrowDown") {
+        setActiveSuggestionIndex((prevIndex) =>
+          prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1
+        );
+      } else if (e.key === "ArrowUp") {
+        setActiveSuggestionIndex((prevIndex) =>
+          prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
+        );
+      } else if (e.key === "Enter" && activeSuggestionIndex >= 0) {
+        handleSuggestionClick(suggestions[activeSuggestionIndex]);
+        setActiveSuggestionIndex(-1);
+        setSuggestions([]); // Clear suggestions after pressing Enter
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setSearchQuery(""); // Clear the search input
+      setSuggestions([]);
+      setActiveSuggestionIndex(-1); // Reset active suggestion index on route change
+    };
+
+    Router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
+
   return (
     <header className="bg-black w-full">
       <div className="flex justify-center lg:justify-around tablet:items-baseline lg:max-w-6xl miniphone:max-w-7xl miniphone:items-center mx-auto">
@@ -35,7 +148,7 @@ export default function Component() {
               <TfiMenu className="text-white h-7 w-7" />
             </button>
             <div className="flex items-baseline miniphone:items-center h-20 w-20 lg:h-24 miniscreen:w-24 lg:w-16 miniphone:h-14 phone:h-16 phone:w-11 miniphone:w-11 pt-1 miniphone:mb-6 phone:mb-5 miniphone:mr-2 phone-mr-2">
-              <img src="/logo1.png" alt="logo" />
+              <Img src="/logo1.png" alt="logo" width={100} height={100} />
             </div>
           </div>
           <nav className="hidden space-x-4 ml-5 tablet:flex">
@@ -66,8 +179,35 @@ export default function Component() {
           </nav>
         </div>
         <div className="flex justify-center items-center relative tablet:w-60 miniscreen:w-96 lg:w-80 phon:my-0 sm:my-3 miniphone:w-52 miniphone:h-10">
-          <Input className="pl-10 w-full" placeholder="Search" type="search" />
+          <Input
+            className="pl-10 w-full"
+            placeholder="Search"
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
           <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+          {suggestions.length > 0 && (
+            <div
+              className="absolute top-full mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10"
+              ref={suggestionMenuRef}
+            >
+              <ul>
+                {suggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    className={`px-4 py-2 hover:bg-gray-200 cursor-pointer ${
+                      activeSuggestionIndex === index ? "bg-gray-200" : ""
+                    }`}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <Link
           href="/cart"
@@ -94,16 +234,13 @@ export default function Component() {
           >
             About Us
           </Link>
-          <Link
-            href="/english"
-            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
-          >
-            English
-          </Link>
+        
         </div>
-        <FirstSidebar  sidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} />
+        <FirstSidebar
+          sidebarVisible={isSidebarVisible}
+          toggleSidebar={toggleSidebar}
+        />
       </div>
     </header>
   );
 }
-

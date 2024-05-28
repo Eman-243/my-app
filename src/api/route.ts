@@ -6,3 +6,7 @@ export async function GET(productId: string) {
 }
 //app/pages/productList/[categoryId]/[subcategoryId]/[productId]/route.ts
 
+export async function GET_RELATED(subcategory: string) {
+    const relatedProducts = products.filter(product => product.subcategory === subcategory);
+    return relatedProducts;
+}

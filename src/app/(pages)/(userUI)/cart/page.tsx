@@ -1,6 +1,8 @@
 "use client";
 import { Button } from "@/components/Cart/ui/button"
 import { useRouter } from "next/navigation";
+import Img from 'next/image';
+
 
 export default function Component() {
     const products = [
@@ -65,7 +67,7 @@ export default function Component() {
             {products.map((product, index) => (
               <div key={index} className="flex flex-col miniphone:flex-row justify-between pb-4">
                 <div className="flex flex-1">
-                  <img src={product.image} alt={product.name} className="mr-4 w-20 h-20 sm:w-auto sm:h-auto object-cover" />
+                  <Img src={product.image} alt={product.name} width={200} height={200} className="mr-4 w-20 h-20 sm:w-auto sm:h-auto object-cover" />
                   <div>
                     <h2 className="font-semibold text-lg">{product.name}</h2>
                     <p className="text-sm mb-2 leading-6">{product.description}</p>

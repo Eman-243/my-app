@@ -13,7 +13,7 @@ interface ComponentProps {
 }
 
 // Define the component
-export default function Component({ selectedCategory, setSelectedCategory, selectedSubcategory, setSelectedSubcategory }: ComponentProps) {
+export default function Component({ setSelectedCategory, setSelectedSubcategory }: ComponentProps) {
     // State to keep track of which categories are expanded
     const [expandedCategories, setExpandedCategories] = useState<Array<boolean>>([]);
 
@@ -66,13 +66,6 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
         if (!category || !subcategory) {
             return;
         }
-    
-        // Log the category and subcategory
-        console.log('useEffect running');
-        console.log('category from URL:', category);
-        console.log('subcategory from URL:', subcategory);
-        // Update the selected category and subcategory
-        console.log('setting category and subcategory');
         setSelectedCategory(category);
         setSelectedSubcategory(subcategory);
         const categoryIndex = categories.findIndex((cat) => cat.name === category);
@@ -84,11 +77,14 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
             setExpandedCategories(newExpandedCategories);
         }
     }, [category, subcategory]); // Run this effect whenever the category or subcategory changes
-
+ 
 
     return (
         <div className="w-full max-w-50 min-h-scree   dark:border-[#5f5f5f]  dark:bg-[#424242] bg-zinc-100 border border-transparent  shadow-md rounded-sm font-sans box-content overflow-auto flex-shrink-0 flex-grow h-full ">
-            <h1 className="text-lg font-bold pb-4 pt-1 pl-4">Category</h1>
+            <div className='flex items-center p-1'>
+            <h1 className="text-lg font-bold pb-4 pt-1 pl-3">Category</h1>
+
+            </div>
             <div className="space-y-4">
                 {categories.map((category, index) => (
                     <div key={index}>
@@ -99,19 +95,21 @@ export default function Component({ selectedCategory, setSelectedCategory, selec
                                 handleCategoryClick(index);
                             }}
                         >
-                            <span>{category.name}</span>
+                            <span className='text-[16px] font-semibold'>{category.name}</span>
                             <svg className="w-5 h-5 text-gray-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path d={expandedCategories[index] ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                             </svg>
                         </button>
                         {expandedCategories[index] && (
-                            <div className="ml-4 space-y-1 dark:text-white text-sm px-4 flex flex-col text-left items-start">
+                            <div className="  space-y-1 dark:text-white text-sm  flex flex-col text-left items-start">
                                 {category.subcategories.map((subcategory) => (
-                                    <button key={subcategory} onClick={() => {
+                                    <button className='hover:bg-white/50 w-full text-left rounded-md' key={subcategory} onClick={() => {
                                         console.log('subcategory clicked:', subcategory);
                                         handleSubcategoryClick(category.name, subcategory);
                                     }}>
-                                        {subcategory}
+                                       <div className='text-[15px] my-[3px]  pl-6'>
+                                       {subcategory} 
+                                        </div> 
                                     </button>
                                 ))}
                             </div>
