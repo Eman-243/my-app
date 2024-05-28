@@ -4,9 +4,14 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 
 
+
 export const metadata: Metadata = {
   title: "Nexcel",
+  openGraph: {
+    title: "Nexcel",
   description: "Nexcel is a e-commerce website.",
+
+  },
 };
 const roboto = Roboto({
   weight: '400',
