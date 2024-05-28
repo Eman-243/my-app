@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import React, { useRef } from "react";
+import Img from "next/image";
 
 interface IconProps extends React.SVGProps<SVGSVGElement> { }
 
@@ -46,11 +47,12 @@ export default function Brands() {
         <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap scrollbar-hide" ref={scrollContainer}>
   
         {brands.map((brand, index) => (
-          <img
+          <Img
             key={index}
             alt={brand.alt}
             className="w-36 h-24 flex-shrink-0 object-cover"
             src={brand.src}
+            width={100} height={100} 
           />
         ))}
   

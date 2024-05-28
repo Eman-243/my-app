@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import Img from 'next/image';
 
 export default function Products() {
   const [products, setProducts] = useState([
@@ -28,7 +29,7 @@ export default function Products() {
         {products.map(product => (
           <li key={product.id} className="flex items-center justify-between mb-2 p-2 border rounded">
             <div className="flex items-center">
-              <img src={product.image} alt={product.name} className="w-16 h-16 object-cover mr-4" />
+              <Img src={product.image} alt={product.name} height={100} width={100} className="w-16 h-16 object-cover mr-4" />
               <div>
                 <h3 className="text-lg">{product.name}</h3>
                 <p>{product.description}</p>

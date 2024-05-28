@@ -15,6 +15,10 @@ export default function Sidebar() {
               <Link href="/profile/order-history" className="flex items-center justify-between w-full text-left text-sm font-medium text-gray-900 px-4 pb-5">
                 <span className="text-base">Order History</span>
               </Link>
+              <Link href="/dashboard" className="flex items-center justify-between w-full text-left text-sm font-medium text-gray-900 px-4 pb-5">
+                <span className="text-base">Admin Dashboard</span>
+              </Link>
+              
               <button className="flex items-center justify-between w-full text-left text-sm font-medium text-gray-900 px-4 pb-5">
                 <span className="text-base">Logout</span>
               </button>

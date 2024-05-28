@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import Img from 'next/image';
 
 export default function AddProduct() {
   const [name, setName] = useState('');
@@ -108,7 +109,7 @@ export default function AddProduct() {
       )}
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Product Image</label>
-        {imagePreview && <img src={imagePreview} alt="Product Image" className="my-4 w-32 h-32 object-cover" />}
+        {imagePreview && <Img src={imagePreview} alt="Product Image" height={200} width={200} className="my-4 w-32 h-32 object-cover" />}
         <input type="file" onChange={handleImageChange} />
       </div>
       <Button onClick={handleAddProduct} variant="default">
