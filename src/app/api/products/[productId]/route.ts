@@ -3,23 +3,52 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "prisma/prisma-client";
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { productId: string } }
+) {
+  const { productId } = params;
+  
+  if (!productId) {
+    return NextResponse.json(
+      {
+        message: "Please provide required fields",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
   try {
-    const productID = req.nextUrl.pathname.split("/")[3];
-    if (!productID) {
+    const catId = parseInt(productId, 10);
+    if (isNaN(catId)) {
       return NextResponse.json(
         {
-          message: "Invalid request",
+          message: "Invalid category id",
         },
         {
           status: 400,
         }
       );
     }
+
     const product = await prisma.product.findUnique({
       where: {
-        ProductId: parseInt(productID),
+        ProductId: catId,
       },
+    });
+
+    if (!product) {
+      return NextResponse.json({
+        message: "Product not found",
+      }, {
+        status: 404,
+      });
+    }
+
+    return NextResponse.json({
+      message: "Got product",
+      data: product,
     });
   } catch (error) {
     return NextResponse.json(

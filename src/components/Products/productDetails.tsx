@@ -9,6 +9,8 @@ import { FaUserCircle } from 'react-icons/fa';
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import Img from 'next/image';
+import axios from 'axios';
+import { product } from 'prisma/prisma-client';
 
 
 
@@ -33,7 +35,7 @@ interface Comment {
 }
 
 export default function ProductDetail({ productId }: ProductDetailProps) {
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<product | null>(null);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [activeTab, setActiveTab] = useState<string>('description');
   const [comments, setComments] = useState<Comment[]>([]);
@@ -43,20 +45,22 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
 
 
   useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`/api/products/${productId}`);
+        setProduct(response.data);
+        // setSelectedImage(response.data.images[0]);
+      } catch (error) {
+        console.error('Failed to fetch product details:', error);
+        // Optionally set an error state and display it in UI
+      }
+    };
+  
     if (productId) {
-      const fetchProduct = async () => {
-        const fetchedProduct = await GET(productId);
-        if (fetchedProduct) {
-          setProduct(fetchedProduct);
-          setSelectedImage(fetchedProduct.images[0]);
-        }
-      };
-      fetchProduct();
+      console.log('Fetching product details...');
+      
+
     }
-    // Fetch comments (fake or real) when product changes
-    fetchComments();
-    // Fetch related products when product changes
-    fetchRelatedProducts();
   }, [productId]);
 
   // Function to fetch comments (fake or real)
@@ -75,16 +79,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
   const fetchRelatedProducts = () => {
     // You need to implement logic to fetch related products based on the current product's subcategory
     // For demonstration purposes, let's assume related products are fetched from a fake list
-    const fakeRelatedProducts: Product[] = [
-      { id: "1", name: "Related Product 1", price: "50", category: "Category", subcategory: product?.subcategory || "", images: [] },
-      { id: "2", name: "Related Product 2", price: "60", category: "Category", subcategory: product?.subcategory || "", images: [] },
-      { id: "3", name: "Related Product 3", price: "70", category: "Category", subcategory: product?.subcategory || "", images: [] },
-      { id: "4", name: "Related Product 1", price: "50", category: "Category", subcategory: product?.subcategory || "", images: [] },
-      { id: "5", name: "Related Product 2", price: "60", category: "Category", subcategory: product?.subcategory || "", images: [] },
-      { id: "6", name: "Related Product 3", price: "70", category: "Category", subcategory: product?.subcategory || "", images: [] },
-    ];
-    // Update relatedProducts state
-    setRelatedProducts(fakeRelatedProducts);
+    
   };
 
   // Function to handle adding a new comment
@@ -112,16 +107,16 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
   const scrollContainer = useRef<HTMLDivElement>(null);
 
   const scroll = (scrollOffset: number) => {
-    console.log(scrollContainer.current); // Check if the ref is attached to the correct element
+    // console.log(scrollContainer.current); // Check if the ref is attached to the correct element
     if (scrollContainer.current) {
-      console.log(scrollContainer.current.scrollLeft); // Check the initial scroll position
+      // console.log(scrollContainer.current.scrollLeft); // Check the initial scroll position
       scrollContainer.current.scrollLeft += scrollOffset;
-      console.log(scrollContainer.current.scrollLeft); // Check the scroll position after scrolling
+      // console.log(scrollContainer.current.scrollLeft); // Check the scroll position after scrolling
     }
   };
-
-
-
+  if (!productId) {
+    console.error('Product ID is missing');
+  }
   if (!product) {
     return null;
   }
@@ -131,8 +126,8 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
       <div className=" my-12 rounded-sm font-sans shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white">
-            <Img
-              alt={product.name}
+            {/* <Img
+              alt={product.ProductName}
               className="w-full h-auto object-contain"
               height="500"
               src={selectedImage}
@@ -140,25 +135,25 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                 objectFit: "cover",
               }}
               width="500"
-            />
+            /> */}
             <div className="flex space-x-2 mt-4">
-              {product.images.map((image, index) => (
+              {/* {product.images.map((image, index) => (
                 <Img
                   key={index}
-                  alt={product.name}
+                  alt={product.ProductName}
                   className="w-20 h-20 object-contain cursor-pointer"
                   src={image}
                   onClick={() => setSelectedImage(image)}
                   width={80} height={80}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="space-y-4 bg-zinc-100 border border-transparent dark:border-[#5f5f5f] dark:bg-[#424242] p-4 flex flex-col justify-between">
             <div>
-              <h1 className="text-4xl font-bold">{product.name}</h1>
+              <h1 className="text-4xl font-bold">{product.ProductName}</h1>
               <div className="flex items-center space-x-2">
-                <span className="text-3xl font-semibold text-[#F9B823]">{product.price}</span>
+                <span className="text-3xl font-semibold text-[#F9B823]">{product.Price}</span>
                 <span className="text-sm">Inclusive of VAT</span>
               </div>
               <div className="border-t border-gray-200 pt-4">
@@ -270,7 +265,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                   <div className="self-end">
                     <FaRegHeart className="text-[#F9B823] w-6 h-6" />
                   </div>
-                  <Img
+                  {/* <Img
                     alt={relatedProduct.name}
                     className="mb-4"
                     height="150"
@@ -280,7 +275,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                       aspectRatio: "214/150",
                     }}
                     width="200"
-                  />
+                  /> */}
                   <h3 className="sm:text-lg miniphone:text-sm font-semibold">{relatedProduct.name}</h3>
                   <p className="text-[#F9B823] font-semibold sm:text-base miniphone:text-sm">{relatedProduct.price}BD</p>
                 </motion.div>

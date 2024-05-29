@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { checkAdmin } from "@/lib/info";
 
 const prisma = new PrismaClient();
 
@@ -13,8 +14,6 @@ export async function GET() {
       prisma.$disconnect();
     });
     await prisma.$disconnect();
-
-    console.log("Categories fetched successfully:", categories);
 
     // Prepare the response data by organizing categories and subcategories
     const responseData = categories.map(category => ({

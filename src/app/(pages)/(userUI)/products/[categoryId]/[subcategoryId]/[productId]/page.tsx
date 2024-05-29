@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation';
 export default function ProductDetailPage() {
   const params = useParams();
   const { productId } = params;
-
   if (typeof productId !== 'string') {
     return <p>Invalid product ID</p>;
   }

@@ -72,7 +72,7 @@ export default function ProductList({ selectedCategory, selectedSubcategory }: {
 
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('/api/categories');
+                const response = await axios.get('/api/productCategory');
                 setCategories(response.data.data);
             } catch (error) {
                 console.error("Error fetching categories:", error);
