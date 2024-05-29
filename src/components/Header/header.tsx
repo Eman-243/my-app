@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import Router from "next/router";
 import FirstSidebar from "@/components/Header/ui/firstSidebar";
 import Img from "next/image";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export const products = [
   {
@@ -50,6 +52,7 @@ export default function Component() {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   const suggestionMenuRef = useRef<HTMLDivElement>(null);
 
@@ -98,6 +101,11 @@ export default function Component() {
     };
   }, [suggestions]);
 
+  useEffect(() => {
+    const session = Cookies.get("session");
+    setIsLoggedIn(!!session);
+  }, []);
+
   const handleSuggestionClick = (suggestion: any) => {
     setSearchQuery(suggestion.name);
     setSuggestions([]); // Clear suggestions immediately after click
@@ -123,6 +131,17 @@ export default function Component() {
         setActiveSuggestionIndex(-1);
         setSuggestions([]); // Clear suggestions after pressing Enter
       }
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await axios.post("/api/auth/logout");
+      Cookies.remove("session");
+      setIsLoggedIn(false);
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
     }
   };
 
@@ -222,19 +241,35 @@ export default function Component() {
           >
             <RiShoppingCartLine className="text-white lg:h-6 lg:w-6 sm:h-5 sm:w-5" />
           </Link>
-          <Link
-            href="/sign-in"
-            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
-          >
-            Sign In
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link
+                href="/profile"
+                className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+              >
+                Profile
+              </Link>
+              <button
+                onClick={handleSignOut}
+                className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+            >
+              Sign In
+            </Link>
+          )}
           <Link
             href="/about-us"
             className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
           >
             About Us
           </Link>
-        
         </div>
         <FirstSidebar
           sidebarVisible={isSidebarVisible}

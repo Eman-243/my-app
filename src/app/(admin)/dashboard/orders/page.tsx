@@ -17,6 +17,8 @@ export default function Orders() {
   // Fetch orders data
   useEffect(() => {
     axios.get('/api/order').then(response => {
+      console.log(response.data);
+      
       setOrders(response.data.data);
     });
     setLoading(false);

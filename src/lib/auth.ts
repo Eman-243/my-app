@@ -40,7 +40,7 @@ export async function login(formData: FormData) {
   }
 
   // If credentials are correct, create the session
-  const expires = new Date(Date.now() + 10 * 60 * 1000); // Session expiration
+  const expires = new Date(Date.now() + 10 * 10 * 60 * 1000); // Session expiration
   const session = await encrypt({ user, expires });
 
   // Save the session in cookies
