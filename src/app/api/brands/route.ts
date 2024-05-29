@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function GET() {
     try {
-        const brands = prisma.product_brand.findMany().finally(() => {
+        const brands = await prisma.product_brand.findMany().finally(() => {
             prisma.$disconnect();
         })
 

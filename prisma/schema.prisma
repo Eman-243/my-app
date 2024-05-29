@@ -44,30 +44,36 @@ model blogtagblog {
 }
 
 model order {
-  OrderId   Int     @id @default(autoincrement())
+  OrderId   Int       @id @default(autoincrement())
   UserID    Int
   OrderDate DateTime? @db.Date
-  Status    String? @db.VarChar(50)
+  Status    String?   @db.VarChar(50)
   Total     Float?
+
+  orderProducts order_product[] @relation("OrderToOrderProduct")
 
   @@index([UserID], map: "FK_Order_User")
 }
 
 model order_product {
   OrderId        Int
-  Qunatity       Int
-  orderProductID Int @id @default(autoincrement())
+  Quantity       Int
+  orderProductID Int    @id @default(autoincrement())
   ProductId      Int
 
-  @@index([OrderId], map: "IXFK_Order Product_Order")
-  @@map("order product")
+  order   order   @relation(fields: [OrderId], references: [OrderId], name: "OrderToOrderProduct")
+  product product @relation(fields: [ProductId], references: [ProductId], name: "ProductToOrderProduct")
+
+  @@index([OrderId], map: "IXFK_OrderProduct_Order")
+  @@index([ProductId], map: "IXFK_OrderProduct_Product")
+  @@map("order_product")
 }
 
 model product {
   BrandId           Int
   CategoryId        Int
   ProductId         Int      @id @default(autoincrement())
-  category   product_category  @relation(fields: [CategoryId], references: [CategoryId])
+  category          product_category  @relation(fields: [CategoryId], references: [CategoryId])
   ProductName       String   @db.VarChar(50)
   Price             Float?
   Short_Description String?  @map("Short Description") @db.VarChar(50)
@@ -77,11 +83,11 @@ model product {
   Show_price        Boolean? @map("Show price")
   Model             String?  @db.VarChar(50)
   img               String?  @db.VarChar(50)
-  orderProductID    Int?
 
-  @@index([orderProductID], map: "IXFK_Product_Order Product")
-  @@index([BrandId], map: "IXFK_Product_Product Brand")
-  @@index([CategoryId], map: "IXFK_Product_Product Category")
+  orderProducts order_product[] @relation("ProductToOrderProduct")
+
+  @@index([BrandId], map: "IXFK_Product_ProductBrand")
+  @@index([CategoryId], map: "IXFK_Product_ProductCategory")
 }
 
 model product_brand {

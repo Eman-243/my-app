@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { usePathname } from 'next/navigation';
+import axios from 'axios';
+import { user } from 'prisma/prisma-client';
 
 export default function EditUser() {
   const pathname = usePathname();
@@ -13,40 +15,23 @@ export default function EditUser() {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [telephone, setTelephone] = useState('');
-  const [users, setUsers] = useState([
-    { id: 1, username: 'Ali Ahmed', email: 'ali@example.com', address: '123 Main St', telephone: '123-456-7890' },
-    { id: 2, username: 'Eman Nayel', email: 'eman@example.com', address: '456 Oak St', telephone: '987-654-3210' },
-    { id: 3, username: 'Ahmed', email: 'ahmed@example.com', address: '789 Pine St', telephone: '555-555-5555' },
-    // Add more users as needed
-  ]);
 
   const [successMessage, setSuccessMessage] = useState('');
 
-  useEffect(() => {
-    if (id) {
-      const user = users.find(user => user.id === parseInt(id));
-      if (user) {
-        setUsername(user.username);
-        setEmail(user.email);
-        setAddress(user.address);
-        setTelephone(user.telephone);
-      } else {
-        console.log(`User with id: ${id} not found`);
-      }
-    }
-  }, [id, users]);
 
   const handleEditUser = () => {
-    setUsers(prevUsers =>
-      prevUsers.map(user =>
-        user.id === parseInt(id) ? { ...user, username, email, address, telephone } : user
-      )
-    );
+    
+    axios.patch(`/api/users/${id}`, {
+      username: username,
+      email: email,
+      address:address,
+      phone: telephone,
+    }).then(() => {
     setSuccessMessage('User information successfully updated.');
     setTimeout(() => {
       setSuccessMessage('');
     }, 3000); // Hide success message after 3 seconds
-  };
+  })};
 
   return (
     <div className="p-6">

@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   try {
-    const categories = await prisma.product_category.findMany().finally(() => {
+    const categories = await prisma.product_category.findMany({
+        include:{
+            children: true
+        }
+    }).finally(() => {
       prisma.$disconnect();
     });
 
@@ -66,6 +70,9 @@ export async function POST(req: NextRequest) {
     } else {
       return NextResponse.json({
         message: "You are not authorized to access this route",
+      }, {
+        status: 403,
+      
       });
     }
   } catch (error) {

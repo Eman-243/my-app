@@ -3,27 +3,46 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "prisma/prisma-client";
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest) {
-    const orderId = req.nextUrl.pathname.split("/")[3];
-    if (!orderId) {
-        return NextResponse.json({
-            message: "Invalid request",
-        }, {
-            status: 400,
-        });
+export async function GET(
+    req: NextRequest,
+    { params }: { params: { id: string } }
+  ) {
+    const { id } = params;
+  
+    if (!id) {
+      return NextResponse.json(
+        {
+          message: "Please provide required fields",
+        },
+        {
+          status: 400,
+        }
+      );
     }
-
+      const catId = parseInt(id, 10);
+      if (isNaN(catId)) {
+        return NextResponse.json(
+          {
+            message: "Invalid category id",
+          },
+          {
+            status: 400,
+          }
+        );
+      }
     const order = await prisma.order.findUnique({
         where: {
-            OrderId: parseInt(orderId),
-        },
+            OrderId: catId,
+        }, include:{
+            orderProducts: {
+                include: {
+                    product: true,
+                }
+            }
+        }
     });
 
-    const products = await prisma.order_product.findMany({
-        where: {
-            OrderId: parseInt(orderId),
-        },
-    });
+
 
     if (!order) {
         return NextResponse.json({
@@ -38,7 +57,6 @@ export async function GET(req: NextRequest) {
             message: "Got order",
             data: {
                 order,
-                products,
             },
         });
     } else {

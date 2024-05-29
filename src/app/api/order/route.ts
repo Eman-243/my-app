@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         data: {
           OrderId: order.OrderId,
           ProductId: product.ProductId,
-          Qunatity: product.Quantity,
+          Quantity: product.Quantity,
         },
       });
 

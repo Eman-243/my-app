@@ -1,25 +1,33 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { product_category } from 'prisma/prisma-client';
+import axios from 'axios';
 
 export default function Category() {
-  const [categories, setCategories] = useState([
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Fashion' },
-    { id: 3, name: 'Home' },
-    // Add more categories as needed
-  ]);
+  const [categories, setCategories] = useState<product_category[]>([])
+  const [isLoading, setLoading] = useState(true);
 
   const router = useRouter();
 
   const handleDelete = (id: number) => {
     // Implement the delete functionality here
     console.log(`Delete category with id: ${id}`);
-    setCategories(categories.filter(category => category.id !== id));
+    setCategories(categories.filter(category => category.CategoryId !== id));
   };
 
+  useEffect(() => {
+    axios.get('/api/productCategory').then(response => {
+      setCategories(response.data.data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
@@ -30,16 +38,16 @@ export default function Category() {
       </div>
       <ul>
         {categories.map(category => (
-          <li key={category.id} className="flex items-center justify-between mb-2 p-2 border rounded">
+          <li key={category.CategoryId} className="flex items-center justify-between mb-2 p-2 border rounded">
             <div className='flex flex-col'>
-              <span className="text-lg font-bold">Category ID:{category.id}</span>
-              <span className="text-lg">Category Name: {category.name}</span>
+              <span className="text-lg font-bold">Category ID:{category.CategoryId}</span>
+              <span className="text-lg">Category Name: {category.CategoryName}</span>
             </div>
             <div className="flex gap-2 flex-col">
-              <Button variant="outline" size="sm" onClick={() => router.push(`/dashboard/Category/${category.id}`)}>
+              <Button variant="outline" size="sm" onClick={() => router.push(`/dashboard/Category/${category.CategoryId}`)}>
                 Edit
               </Button>
-              <Button onClick={() => handleDelete(category.id)} variant="outline" size="sm" color="danger">
+              <Button onClick={() => handleDelete(category.CategoryId)} variant="outline" size="sm" color="danger">
                 Delete
               </Button>
             </div>

@@ -31,13 +31,11 @@ export async function GET(
         }
       );
     }
-    const category = await prisma.product_category
-      .findUnique({
+    const subCategories = prisma.product_category
+      .findMany({
         where: {
-          CategoryId: catId,
-        }, include: {
-            children: true
-        }
+          parentId: catId,
+        },
       })
       .finally(() => {
         prisma.$disconnect();
@@ -45,8 +43,8 @@ export async function GET(
 
     return NextResponse.json(
       {
-        message: "category fetched successfully",
-        data: category,
+        message: "Subcategories fetched successfully",
+        data: subCategories,
       },
       {
         status: 200,

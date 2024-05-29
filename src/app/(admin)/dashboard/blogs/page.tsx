@@ -1,49 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from '@/components/ui/button';
+import { blog } from "prisma/prisma-client";
+import axios from 'axios';
 
-interface Blog {
-    id: number;
-    name: string;
-    username: string;
-    text: string;
-    picture: string;
-}
 
-const BlogData: Blog[] = [
-    {
-        id: 1,
-        name: "First Blog",
-        username: "user1",
-        text: "This is the first blog text.",
-        picture: "/path/to/picture1.jpg",
-    },
-    {
-        id: 2,
-        name: "Second Blog",
-        username: "user2",
-        text: "This is the second blog text.",
-        picture: "/path/to/picture2.jpg",
-    },
-];
 
 export default function Blogs() {
-    const [blogs, setBlogs] = useState<Blog[]>(BlogData);
+    const [blogs, setBlogs] = useState<blog[]>([]);
     const [newBlog, setNewBlog] = useState({ name: "", username: "", text: "", picture: "" });
     const router = useRouter();
+    const [isLoading, setLoading] = useState(true);
 
     const handleDelete = (id: number) => {
-        setBlogs(blogs.filter((blog) => blog.id !== id));
+        axios.delete(`/api/blog/blogs/${id}`).then(response => {
+            setBlogs(blogs.filter(blog => blog.BlogID !== id));
+        });
     };
 
-    const handleAdd = () => {
-        setBlogs([...blogs, { ...newBlog, id: Date.now() }]);
-        setNewBlog({ name: "", username: "", text: "", picture: "" });
-    };
 
-    const handleViewEdit = (blog: Blog) => {
-        router.push(`/dashboard/blogs/${blog.id}`);
+
+    const handleViewEdit = (blog: blog) => {
+        router.push(`/dashboard/blogs/${blog.BlogID}`);
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +34,17 @@ export default function Blogs() {
         router.push('/dashboard/blogs/add-blog'); // Replace '/add-product' with the actual route to the add product page
     };
 
+    useEffect(() => {
+        axios.get('/api/blog/blogs').then(response => {
+          setBlogs(response.data.data);
+          setLoading(false);
+        });
+      }, []);
+    
+      if (isLoading) {
+        return <p>Loading...</p>;
+      }
+
     return (
         <div className="p-6">
             <div className="flex justify-between items-center mb-4">
@@ -62,14 +52,14 @@ export default function Blogs() {
             </div>
             <div>
                 {blogs.map((blog) => (
-                    <div className="flex flex-row justify-between mb-2 p-2 border rounded" key={blog.id} onClick={() => handleViewEdit(blog)} >
+                    <div className="flex flex-row justify-between mb-2 p-2 border rounded" key={blog.BlogID} onClick={() => handleViewEdit(blog)} >
                         <div className='flex flex-col'>
-                            <span className="text-lg font-bold">Blog ID: {blog.id}</span>
-                            <span className="text-lg">Blog Name: {blog.name}</span>
-                            <span className="text-lg">Username: {blog.username}</span>
+                            <span className="text-lg font-bold">Blog ID: {blog.BlogID}</span>
+                            <span className="text-lg">Blog Name: {blog.BlogName}</span>
+                            <span className="text-lg">Username: {blog.UserID}</span>
                         </div>
 
-                        <Button onClick={(e) => { e.stopPropagation(); handleDelete(blog.id); }}>Delete</Button>
+                        <Button onClick={(e) => { e.stopPropagation(); handleDelete(blog.BlogID); }}>Delete</Button>
                     </div>
 
                 ))}

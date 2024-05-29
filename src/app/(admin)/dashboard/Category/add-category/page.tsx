@@ -3,16 +3,21 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import axios from 'axios';
 
 export default function AddCategory() {
   const [name, setName] = useState('');
   const router = useRouter();
 
   const handleAddCategory = () => {
-    // Implement the logic to add the category
-    console.log('Add category:', { name });
+    axios.post('/api/productCategory', {
+      name: name,
+    }).then((res) => {
+      
+      console.log(res);
+      router.push('/dashboard/Category');
+    });
     // After adding, redirect back to categories page
-    router.push('/dashboard/categories');
   };
 
   return (
