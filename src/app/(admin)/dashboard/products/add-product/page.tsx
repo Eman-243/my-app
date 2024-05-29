@@ -14,6 +14,7 @@ export default function AddProduct() {
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [subCategories, setSubCategories] = useState<string[]>([]);
+  const [isLoading, setLoading] = useState(true);
 
   const router = useRouter();
 
@@ -56,7 +57,10 @@ export default function AddProduct() {
     // After adding, redirect back to products page
     router.push('/products');
   };
-
+  
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
   return (
     <div className="p-6">
       <h2 className="mb-4 text-xl font-semibold">Add Product</h2>
