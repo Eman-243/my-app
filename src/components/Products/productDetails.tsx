@@ -1,13 +1,16 @@
 "use client";
 import React, { useEffect, useState, useRef } from 'react';
-// import { GET } from '@/api/route';
+import { GET } from '@/app/api/route';
 import { Button } from "@/components/Cart/ui/button";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FaRegHeart, FaUserCircle } from 'react-icons/fa';
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { FaRegHeart } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 import Img from 'next/image';
-import axios from 'axios';
+
+
 
 interface Product {
   images: string[];
@@ -36,58 +39,88 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<{ userName: string, comment: string }>({ userName: '', comment: '' });
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
-  const scrollContainer = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     if (productId) {
       const fetchProduct = async () => {
-        const fetchedProduct = await axios.get(`/api/products/${productId}`);
-        setProduct(fetchedProduct.data);
-        setSelectedImage(fetchedProduct.data.images[0]);
+        const fetchedProduct = await GET(productId);
+        if (fetchedProduct) {
+          setProduct(fetchedProduct);
+          setSelectedImage(fetchedProduct.images[0]);
+        }
       };
       fetchProduct();
     }
+    // Fetch comments (fake or real) when product changes
     fetchComments();
+    // Fetch related products when product changes
     fetchRelatedProducts();
   }, [productId]);
 
-  const fetchComments = async () => {
-    // Replace this with your API endpoint to fetch comments
-    const response = await axios.get(`/api/comments?productId=${productId}`);
+  // Function to fetch comments (fake or real)
+  const fetchComments = () => {
+    // Simulated fake comments
+    const fakeComments: Comment[] = [
+      { id: 1, userName: "User1", comment: "This product is amazing!", date: "12th June 2021" },
+      { id: 2, userName: "User2", comment: "Great quality, worth the price.", date: "12th June 2021" },
+      { id: 3, userName: "User3", comment: "I'm satisfied with my purchase.", date: "12th June 2021" },
+    ];
+    // Update comments state
+    setComments(fakeComments);
   };
 
-  const fetchRelatedProducts = async () => {
-    // Replace this with your API endpoint to fetch related products
-    const response = await axios.get(`/api/products?category=${product?.category}`);
+  // Function to fetch related products
+  const fetchRelatedProducts = () => {
+    // You need to implement logic to fetch related products based on the current product's subcategory
+    // For demonstration purposes, let's assume related products are fetched from a fake list
+    const fakeRelatedProducts: Product[] = [
+      { id: "1", name: "Related Product 1", price: "50", category: "Category", subcategory: product?.subcategory || "", images: [] },
+      { id: "2", name: "Related Product 2", price: "60", category: "Category", subcategory: product?.subcategory || "", images: [] },
+      { id: "3", name: "Related Product 3", price: "70", category: "Category", subcategory: product?.subcategory || "", images: [] },
+      { id: "4", name: "Related Product 1", price: "50", category: "Category", subcategory: product?.subcategory || "", images: [] },
+      { id: "5", name: "Related Product 2", price: "60", category: "Category", subcategory: product?.subcategory || "", images: [] },
+      { id: "6", name: "Related Product 3", price: "70", category: "Category", subcategory: product?.subcategory || "", images: [] },
+    ];
+    // Update relatedProducts state
+    setRelatedProducts(fakeRelatedProducts);
   };
 
-  const handleAddComment = async () => {
+  // Function to handle adding a new comment
+  const handleAddComment = () => {
+    // Assuming some validation here before adding comment
     if (newComment.userName && newComment.comment) {
-      // Replace this with your API endpoint to add a comment
-      const response = await fetch('/api/comments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId,
-          ...newComment,
-          date: new Date().toLocaleDateString(),
-        }),
-      });
-      if (response.ok) {
-        const addedComment = await response.json();
-        setComments([...comments, addedComment]);
-        setNewComment({ userName: '', comment: '' });
-      }
+      const updatedComments = [...comments];
+      const newId = comments.length + 1; // Generate ID for new comment
+      updatedComments.push({ id: newId, ...newComment, date: new Date().toLocaleDateString() });
+      setComments(updatedComments);
+      setNewComment({ userName: '', comment: '' }); // Reset newComment state
     }
   };
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+  const scrollContainer = useRef<HTMLDivElement>(null);
 
   const scroll = (scrollOffset: number) => {
+    console.log(scrollContainer.current); // Check if the ref is attached to the correct element
     if (scrollContainer.current) {
+      console.log(scrollContainer.current.scrollLeft); // Check the initial scroll position
       scrollContainer.current.scrollLeft += scrollOffset;
+      console.log(scrollContainer.current.scrollLeft); // Check the scroll position after scrolling
     }
   };
+
+
 
   if (!product) {
     return null;
@@ -95,7 +128,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
 
   return (
     <div className='max-w-6xl mx-auto h-full'>
-      <div className="my-12 rounded-sm font-sans shadow-lg">
+      <div className=" my-12 rounded-sm font-sans shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white">
             <Img
@@ -116,8 +149,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                   className="w-20 h-20 object-contain cursor-pointer"
                   src={image}
                   onClick={() => setSelectedImage(image)}
-                  width={80}
-                  height={80}
+                  width={80} height={80}
                 />
               ))}
             </div>
@@ -132,7 +164,7 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
               <div className="border-t border-gray-200 pt-4">
                 <p className="text-gray-600 dark:text-gray-300">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                  industry&apos;s standard dummy text ever since the 1500s.
+                  industrys standard dummy text ever since the 1500s.
                 </p>
               </div>
             </div>
@@ -142,11 +174,11 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
       </div>
 
       {/* Comment section */}
-      <div className="mt-8 h-full">
-        <div className="border-b border-gray-200">
+      <div className="mt-8 h-full	">
+        <div className="border-b border-gray-200 ">
           <nav className="-mb-px flex justify-center space-x-8">
             <button
-              className={`px-1 py-4 text-lg font-medium ${activeTab === 'description' ? 'text-[#F9B823] border-b-2 border-[#F9B823]' : 'text-gray-500'}`}
+              className={`px-1 py-4  text-lg font-medium ${activeTab === 'description' ? 'text-[#F9B823] border-b-2 border-[#F9B823]' : 'text-gray-500'}`}
               onClick={() => setActiveTab('description')}
             >
               Description
@@ -161,15 +193,18 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
         </div>
 
         <div className="mt-4 min-h-64">
+          {/* Render comments or input fields for new comment */}
           {activeTab === 'description' ? (
             <div className="text-gray-600 dark:text-gray-300">
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry&apos;s standard dummy text ever since the 1500s.
+              <p className="text-gray-600 dark:text-gray-300">
+                Lorem Ipsum is simply dummy text of the printingandtypesetting industryLorem Ipsum has been the
+                industrys standard dummy text ever since the 1500s.
               </p>
+              {/* Description content */}
             </div>
           ) : (
             <div>
+              {/* Render comments */}
               {comments.length > 0 ? (
                 comments.map(comment => (
                   <div key={comment.id} className="border-b flex flex-row border-gray-200 pb-4 mb-4">
@@ -180,7 +215,10 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                         <p className='text-[12px] text-gray-500 dark:text-gray-300 italic ml-2'>{comment.date}</p>
                       </div>
                       <p className="text-gray-600 dark:text-gray-300">{comment.comment}</p>
+
+
                     </div>
+
                   </div>
                 ))
               ) : (
@@ -188,7 +226,8 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                   No reviews yet. Be the first to review!
                 </div>
               )}
-              <div className="mt-4">
+              {/* Input fields for new comment */}
+              <div className="mt-4 ">
                 <input
                   type="text"
                   placeholder="Your Name"
@@ -203,7 +242,8 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
                   className="border border-gray-300 rounded-md p-2 w-full h-32 resize-none"
                 />
                 <div className='flex justify-end'>
-                  <Button onClick={handleAddComment} className="bg-[#F9B823] w-3/12 dark:hover:bg-[#F9B823] text-white dark:hover:text-white">Add Comment</Button>
+                  <Button onClick={handleAddComment} className="bg-[#F9B823] w-3/12		 dark:hover:bg-[#F9B823] text-white  dark:hover:text-white">Add Comment</Button>
+
                 </div>
               </div>
             </div>
@@ -211,48 +251,48 @@ export default function ProductDetail({ productId }: ProductDetailProps) {
         </div>
 
         <div className="mb-8 font-sans tablet:my-24">
-          <h2 className="tablet:text-3xl miniphone:text-xl font-bold mb-6 tablet:text-left miniphone:text-center">Related Products</h2>
-          <div className="flex items-center">
-            <Button variant="ghost" onClick={() => scroll(-150)}>
-              <IoIosArrowBack className="w-6 h-6" />
-            </Button>
-            <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap scrollbar-hide" ref={scrollContainer}>
-              {relatedProducts.map((relatedProduct) => (
-                <Link href={`/products/${relatedProduct.category}/${relatedProduct.subcategory}/${relatedProduct.id}`} key={relatedProduct.id}>
-                  <motion.div className="p-4 rounded-lg shadow-md my-5 flex flex-col items-center w-full sm:w-full miniphone:w-40 min-h-[300px]" whileHover={{
-                    position: 'relative',
-                    zIndex: 0.1,
-                    scale: 1.1,
-                    transition: {
-                      duration: 0.2,
-                    },
-                  }}>
-                    <div className="self-end">
-                      <FaRegHeart className="text-[#F9B823] w-6 h-6" />
-                    </div>
-                    <Img
-                      alt={relatedProduct.name}
-                      className="mb-4"
-                      height="150"
-                      src={relatedProduct.images[0]}
-                      style={{
-                        objectFit: "cover",
-                        aspectRatio: "214/150",
-                      }}
-                      width="200"
-                    />
-                    <h3 className="sm:text-lg miniphone:text-sm font-semibold">{relatedProduct.name}</h3>
-                    <p className="text-[#F9B823] font-semibold sm:text-base miniphone:text-sm">{relatedProduct.price}BD</p>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
-            <Button variant="ghost" onClick={() => scroll(150)}>
-              <IoIosArrowForward className="w-6 h-6" />
-            </Button>
+        <h2 className="tablet:text-3xl miniphone:text-xl font-bold mb-6 tablet:text-left miniphone:text-center">Related Products</h2>
+        <div className="flex items-center ">
+          <Button variant="ghost" onClick={() => scroll(-150)}>
+            <IoIosArrowBack className="w-6 h-6" />
+          </Button>
+          <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap scrollbar-hide" ref={scrollContainer}>
+            {relatedProducts.map((relatedProduct, index) => (
+              <Link href={`/products/${relatedProduct.category}/${relatedProduct.subcategory}/${relatedProduct.id}`} key={relatedProduct.id}>
+                <motion.div className="p-4  rounded-lg shadow-md my-5 flex flex-col items-center w-full sm:w-full miniphone:w-40 min-h-[300px]" whileHover={{
+                  position: 'relative',
+                  zIndex: 0.1,
+                  scale: 1.1,
+                  transition: {
+                    duration: .2
+                  }
+                }}>
+                  <div className="self-end">
+                    <FaRegHeart className="text-[#F9B823] w-6 h-6" />
+                  </div>
+                  <Img
+                    alt={relatedProduct.name}
+                    className="mb-4"
+                    height="150"
+                    src={relatedProduct.images[0]} // Assuming images are available
+                    style={{
+                      objectFit: "cover",
+                      aspectRatio: "214/150",
+                    }}
+                    width="200"
+                  />
+                  <h3 className="sm:text-lg miniphone:text-sm font-semibold">{relatedProduct.name}</h3>
+                  <p className="text-[#F9B823] font-semibold sm:text-base miniphone:text-sm">{relatedProduct.price}BD</p>
+                </motion.div>
+              </Link>
+            ))}
           </div>
+          <Button variant="ghost" onClick={() => scroll(150)}>
+            <IoIosArrowForward className="w-6 h-6" />
+          </Button>
         </div>
-      </div>
+        </div>
+    </div>
     </div>
   );
 }
