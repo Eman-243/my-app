@@ -180,3 +180,5 @@ CREATE TABLE `useraddress` (
     INDEX `FK_UserAddress_User`(`UserID`),
     PRIMARY KEY (`UserAddressId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+--prisma/20240523130144_init/migration.sql

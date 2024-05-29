@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import Router from "next/router";
 import FirstSidebar from "@/components/Header/ui/firstSidebar";
 import Img from "next/image";
+import { useAuth } from "@/hooks/useAuth"; // Import the custom hook
+
 
 export const products = [
   {
@@ -45,13 +47,18 @@ export const products = [
   },
 ];
 
-export default function Component() {
+
+
+
+
+export default function Header() {
+  const { isLoggedIn, logout } = useAuth();
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
-  const router = useRouter();
   const suggestionMenuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible);
@@ -83,7 +90,7 @@ export default function Component() {
         !suggestionMenuRef.current.contains(event.target as Node)
       ) {
         setSuggestions([]);
-        setActiveSuggestionIndex(-1); // Reset active suggestion index on outside click
+        setActiveSuggestionIndex(-1);
       }
     };
 
@@ -100,8 +107,8 @@ export default function Component() {
 
   const handleSuggestionClick = (suggestion: any) => {
     setSearchQuery(suggestion.name);
-    setSuggestions([]); // Clear suggestions immediately after click
-    setActiveSuggestionIndex(-1); // Reset active suggestion index
+    setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     const { category, subcategory } = suggestion;
     router.push(
       `/products/${category}/${subcategory}?category=${category}&subcategory=${subcategory}`
@@ -121,23 +128,23 @@ export default function Component() {
       } else if (e.key === "Enter" && activeSuggestionIndex >= 0) {
         handleSuggestionClick(suggestions[activeSuggestionIndex]);
         setActiveSuggestionIndex(-1);
-        setSuggestions([]); // Clear suggestions after pressing Enter
+        setSuggestions([]);
       }
     }
   };
 
   useEffect(() => {
     const handleRouteChange = () => {
-      setSearchQuery(""); // Clear the search input
+      setSearchQuery("");
       setSuggestions([]);
-      setActiveSuggestionIndex(-1); // Reset active suggestion index on route change
+      setActiveSuggestionIndex(-1);
     };
 
     Router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
       Router.events.off("routeChangeComplete", handleRouteChange);
     };
-  }, []);
+  }, [Router.events]);
 
   return (
     <header className="bg-black w-full">
@@ -222,19 +229,35 @@ export default function Component() {
           >
             <RiShoppingCartLine className="text-white lg:h-6 lg:w-6 sm:h-5 sm:w-5" />
           </Link>
-          <Link
-            href="/sign-in"
-            className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
-          >
-            Sign In
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link
+                href="/profile"
+                className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+              >
+                Profile
+              </Link>
+              <button
+                onClick={logout}
+                className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
+            >
+              Sign In
+            </Link>
+          )}
           <Link
             href="/about-us"
             className="text-white hover:text-gray-300 minitablet:text-[13px] tablet:text-[12px] sm:text-base lg:text-lg"
           >
             About Us
           </Link>
-        
         </div>
         <FirstSidebar
           sidebarVisible={isSidebarVisible}
@@ -244,3 +267,4 @@ export default function Component() {
     </header>
   );
 }
+
