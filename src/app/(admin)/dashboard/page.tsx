@@ -1,6 +1,7 @@
 "use client";
-import { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
+import {useState, useEffect} from 'react'
+import axios from 'axios';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +12,7 @@ import {
   Legend,
 } from 'chart.js';
 import moment from 'moment';
+import { order, product, user } from 'prisma/prisma-client';
 
 ChartJS.register(
   CategoryScale,
@@ -20,14 +22,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-interface Order {
-  id: number;
-  customerName: string;
-  total: number;
-  status: string;
-  date: string;
-}
 
 interface User {
   id: number;
@@ -44,29 +38,13 @@ interface Product {
   price: number;
 }
 
-const initialOrders: Order[] = [
-  { id: 1, customerName: 'Ali Ahmed', total: 150, status: 'Shipped', date: '2024-05-01' },
-  { id: 2, customerName: 'Eman Nayel', total: 250, status: 'Processing', date: '2024-05-05' },
-  { id: 3, customerName: 'Ahmed', total: 300, status: 'Delivered', date: '2024-05-10' },
-  { id: 4, customerName: 'Sara', total: 400, status: 'Delivered', date: '2024-05-15' },
-  { id: 5, customerName: 'John', total: 500, status: 'Processing', date: '2024-05-20' },
-  // Add more orders as needed
-];
-
 export default function Dashboard() {
-  const [orders] = useState<Order[]>(initialOrders);
-  const [users] = useState<User[]>([
-    { id: 1, username: 'Ali Ahmed', email: 'ali@example.com', address: '123 Main St', telephone: '123-456-7890' },
-    { id: 2, username: 'Eman Nayel', email: 'eman@example.com', address: '456 Oak St', telephone: '987-654-3210' },
-    { id: 3, username: 'Ahmed', email: 'ahmed@example.com', address: '789 Pine St', telephone: '555-555-5555' },
-    // Add more users as needed
-  ]);
-  const [products] = useState<Product[]>([
-    { id: 1, name: 'Product 1', description: 'Description of Product 1', price: 100 },
-    { id: 2, name: 'Product 2', description: 'Description of Product 2', price: 200 },
-    { id: 3, name: 'Product 3', description: 'Description of Product 3', price: 300 },
-    // Add more products as needed
-  ]);
+  const [orders, setOrders] = useState<order[]>([]);
+  const [users, setUsers] = useState<user[]>([]);
+  const [products, setProducts] = useState<product[]>([]);
+
+const [isLoading, setLoading] = useState(true);
+
 
   const totalOrders = orders.length;
   const totalUsers = users.length;
@@ -78,12 +56,14 @@ export default function Dashboard() {
   };
 
   // Group orders by week
-  const ordersByWeek: OrdersByWeek = orders.reduce((acc: OrdersByWeek, order: Order) => {
-    const week = moment(order.date).startOf('week').format('YYYY-MM-DD');
+  const ordersByWeek: OrdersByWeek = orders.reduce((acc: OrdersByWeek, order: order) => {
+    const week = moment(order.OrderDate).startOf('week').format('YYYY-MM-DD');
     if (!acc[week]) {
       acc[week] = 0;
     }
-    acc[week] += order.total;
+    if (order.Total !== null) {
+      acc[week] += order.Total;
+    }
     return acc;
   }, {});
 
@@ -99,6 +79,42 @@ export default function Dashboard() {
       },
     ],
   };
+
+  useEffect(() => {
+    axios({
+      method: 'GET',
+      url: '/api/order',
+    }).then((response) => {
+      console.log(response.data);
+      const fetchedOrders = response.data.data;
+      setOrders(fetchedOrders);
+    })
+
+    axios({
+      method: 'GET',
+      url: '/api/users',
+    }).then((response) => {
+      console.log(response.data);
+      const fetchedUsers = response.data.data;
+      setUsers(fetchedUsers);
+    })
+
+    axios({
+      method: 'GET',
+      url: '/api/products',
+    }).then((response) => {
+      console.log(response.data);
+      const fetchedProducts = response.data.data;
+      setProducts(fetchedProducts);
+    })
+    setLoading(false)
+  }, [])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+
 
   return (
     <div className="p-6">

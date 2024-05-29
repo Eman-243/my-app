@@ -1,54 +1,104 @@
 import { login } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "prisma/prisma-client";
-import { compareSync } from "bcrypt";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt"; // Use bcrypt instead of bcryptjs
 const prisma = new PrismaClient();
 
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { email, password } = body;
 
-  const user = await prisma.user.findUnique({
-    where: {
-      Email: email,
-    },
-  });
+export async function POST(req: NextRequest){
+  try {
+    const { email, password } = await req.json();
 
-  if (!user) {
-    return NextResponse.json({
-      status: 404,
-      message: "User not found",
+    await prisma.user.findUnique({
+      where: {
+        Email: email,
+      },
+    }).then(async user => {
+      if (!user) {
+        return NextResponse.json(
+          {
+            message: "User not found",
+          },
+          {
+            status: 404,
+          }
+        );
+      }
+
+      if (!user.Password) {
+        return NextResponse.json(
+          {
+            message: "User password not found",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      const isMatch = await bcrypt.compare(password, user.Password);
+      
+      if (!isMatch) {
+        return NextResponse.json(
+          {
+            message: "Password does not match",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+      const formData = new FormData();
+      formData.append("username", email);
+      formData.append("password", password);
+
+      const loginResult = await login(formData);
+      
+      if (loginResult === false) {
+        return NextResponse.json(
+          {
+            message: "Login failed",
+          },
+          {
+            status: 500,
+          }
+        );
+      }
+
+    }).catch(error => {
+      return NextResponse.json(
+        {
+          message: "An error occurred",
+          error: error,
+        },
+        {
+          status: 500,
+        }
+      );
+    
+    }).finally(() => {
+      prisma.$disconnect();
     });
+    return NextResponse.json(
+      {
+        message: "Login successful",
+      },
+      {
+        status: 200,
+      }
+    );
+
+
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "An error occurred",
+        error: error,
+      },
+      {
+        status: 500,
+      }
+    );
   }
-
-  if (user.Password && !compareSync(password, user.Password)) {
-    return NextResponse.json({
-      status: 401,
-      message: "Invalid password",
-    });
-  }
-
-  prisma.$disconnect();
-
-  const formData = new FormData();
-  if (!user.UserName || !user.Email) {
-    return NextResponse.json({
-      status: 400,
-      message: "Invalid user data",
-    });
-  }
-  formData.append("username", user.UserName);
-  formData.append("email", user.Email);
-
-  if ((await login(formData)) == false) {
-    return NextResponse.json({
-      status: 500,
-      message: "Login failed",
-    });
-  }
-
-  NextResponse.json({
-    status: 200,
-    message: "Login successful",
-  });
 }

@@ -1,5 +1,5 @@
 import { PrismaClient } from "prisma/prisma-client";
-import { genSaltSync, hashSync } from "bcrypt";
+import { hash } from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 import { Role } from "@/lib/info";
 const prisma = new PrismaClient();
@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const { email, password, phoneNumber } = body;
 
-  const salt = genSaltSync(10);
-  const hashedPassword = hashSync(password, salt);
+
+  const hashedPassword = await hash(password, 10);
 
   if (!email || !password || !phoneNumber) {
     return NextResponse.json(

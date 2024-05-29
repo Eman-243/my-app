@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    if (await checkAdmin) {
+    if (await checkAdmin()) {
       const body = await req.json();
       const {
         name,

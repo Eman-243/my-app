@@ -32,11 +32,15 @@ export async function checkAdmin(): Promise<boolean> {
   }
   const userID = parseInt(userId);
 
-  const user = await prisma.user.findUnique({
-    where: {
-      UserID: userID,
-    },
-  });
+  const user = await prisma.user
+    .findUnique({
+      where: {
+        UserID: userID,
+      },
+    })
+    .finally(() => {
+      prisma.$disconnect();
+    });
 
   const userRole = user?.RoleID;
 

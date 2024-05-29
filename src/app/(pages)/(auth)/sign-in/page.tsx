@@ -1,9 +1,4 @@
-<<<<<<<< HEAD:src/app/(pages)/(auth)/sign-in/page.tsx
-"use client";
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-========
+
 'use client'
 /**
  * v0 by Vercel.
@@ -17,35 +12,35 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import axios from "axios";
 
->>>>>>>> Ali:src/app/(pages)/(auth)/login/page.tsx
+
 
 export default function Component() {
 
   const router = useRouter();
   const Log = (event: FormEvent) => {
     event.preventDefault();
-    const password = username;
 
     axios({
         method: 'post',
-        url: 'http://localhost:3000/login/api',
+        url: '/api/auth/login',
         withCredentials: true,
         data: {
-            username: username,
+            email: email,
             password: password
         }
     }).then(async res => {
-        if (res.status === 201) {
-            // router.push('/tickets');
+        if (res.status === 200) {
+          console.log(res);
+            router.push('/')
         } else {
-          console.log(res.data.body.message);
+          console.log(res.data.message);
           
             alert(res.data.message)
         }
     })
 }
 
-const [username, setUsername] = useState('') 
+const [email, setEmail] = useState('') 
 const [password, setPassword] = useState('')
 
   return (
@@ -57,11 +52,8 @@ const [password, setPassword] = useState('')
             <label className="sr-only" htmlFor="Username">
               Username
             </label>
-<<<<<<<< HEAD:src/app/(pages)/(auth)/sign-in/page.tsx
-            <Input id="email" placeholder="Email Address" type="email" required/>
-========
-            <Input id="username" placeholder="Username" type="text" required onChange={e=> setUsername(e.target.value)}/>
->>>>>>>> Ali:src/app/(pages)/(auth)/login/page.tsx
+
+            <Input id="email" placeholder="Email Address" type="email" required onChange={e=> setEmail(e.target.value)}/>
           </div>
           <div>
             <label className="sr-only" htmlFor="password">
@@ -74,12 +66,7 @@ const [password, setPassword] = useState('')
               Forgot Password?
             </Link>
           </div>
-
-<<<<<<<< HEAD:src/app/(pages)/(auth)/sign-in/page.tsx
-          <Button className="w-full bg-[#F9B823] dark:hover:bg-[#F9B823] dark:hover:text-white text-white" type="submit">Login</Button>
-========
-          <Button className="w-full bg-[#F9B823] text-white" onClick={Log}>Login</Button>
->>>>>>>> Ali:src/app/(pages)/(auth)/login/page.tsx
+          <Button className="w-full bg-[#F9B823] dark:hover:bg-[#F9B823] dark:hover:text-white text-white" onClick={Log}>Login</Button>
         </form>
         <div className="mt-4 text-center">
           <Link href="/sign-up">

@@ -4,7 +4,7 @@ import { product, PrismaClient } from "prisma/prisma-client";
 const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
-  if (await checkAdmin) {
+  if (await checkAdmin()) {
     const orders = await prisma.order.findMany();
     if (!orders) {
       return NextResponse.json({
@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  if (await checkAuthnticated) {
+  if (await checkAuthnticated()) {
     const userId = req.cookies.get("userID")?.value;
     if (!userId) {
       return NextResponse.json({

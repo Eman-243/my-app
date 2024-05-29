@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation'; // Hook to access URL search parameters
 import { useState, useEffect } from 'react' // React hooks for managing state and side effects
 import { useRouter } from 'next/navigation'; // Hook to access the Next.js router
+import axios from 'axios'; // Axios for making HTTP requests
 
 // Define the props that this component accepts
 interface ComponentProps {
@@ -29,6 +30,10 @@ export default function Component({ setSelectedCategory, setSelectedSubcategory 
         },
         // More categories...
     ];
+
+    axios.get('/api/productCategory').then((response) => {
+        console.log(response.data.data);
+    });
 
     // Get the search parameters and router from Next.js
     const searchParams = useSearchParams();

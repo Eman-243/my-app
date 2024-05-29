@@ -26,33 +26,16 @@ export async function decrypt(input: string): Promise<any> {
 export async function login(formData: FormData) {
   // Convert FormData to an object
   let data = Object.fromEntries(formData);
-
   // Find the user in the database
   const user = await prisma.user.findUnique({
     where: {
-      UserName: data.username.toString(),
+      Email: data.username.toString(),
     },
   });
 
   // If user does not exist, handle the error
   if (!user) {
     // Handle error, e.g., user not found
-    return false; // Adjust based on your error handling strategy
-  }
-
-  if (!user.Password) {
-    // Handle error, e.g., user does not have a password
-    return false; // Adjust based on your error handling strategy
-  }
-
-  if (!user.UserName) {
-    return false;
-  }
-
-  // Compare the hashed password
-  const isMatch = await bcrypt.compare(data.password.toString(), user.Password);
-  if (!isMatch) {
-    // Handle error, e.g., incorrect password
     return false; // Adjust based on your error handling strategy
   }
 
@@ -65,18 +48,11 @@ export async function login(formData: FormData) {
     expires,
     httpOnly: true,
   });
-  cookies().set("user", user.UserName, {
-    expires,
-    httpOnly: true,
-  });
-  cookies().set("role", user.RoleID.toString(), {
-    expires,
-    httpOnly: true,
-  });
   cookies().set("userId", user.UserID.toString(), {
     expires,
     httpOnly: true,
   });
+
 
   return true;
   // Redirect to the tickets page
@@ -84,14 +60,6 @@ export async function login(formData: FormData) {
 
 export async function logout() {
   cookies().set("session", "", {
-    expires: new Date(0),
-    httpOnly: true,
-  });
-  cookies().set("user", "", {
-    expires: new Date(0),
-    httpOnly: true,
-  });
-  cookies().set("role", "", {
     expires: new Date(0),
     httpOnly: true,
   });
